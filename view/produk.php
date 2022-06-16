@@ -1,11 +1,11 @@
 <?php include "../layout/header.php" ?>
 <?php include_once("../admin/config/connection.php"); ?>
-<?php 
-          $kat="";
-          if(isset($_GET['id_kat'])){
-          $kat = $_GET['id_kat'];
-          } 
-          ?>
+<?php
+$kat = "";
+if (isset($_GET['id_kat'])) {
+  $kat = $_GET['id_kat'];
+}
+?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -42,29 +42,83 @@
 
                 <form action="../controller/add_chart.php" method="POST">
                   <div class="card-header text-muted border-bottom-0 text-center">
-                    <input type="hidden" name="id_produk" value ="<?php echo $user_data['id_produk']; ?>">
-                    <input type="hidden" name="pelanggan" value ="<?php echo $_SESSION['id_pel']; ?>">
+                    <input type="hidden" name="id_produk" value="<?php echo $user_data['id_produk']; ?>">
+                    <input type="hidden" name="pelanggan" value="<?php echo $_SESSION['id_pel']; ?>">
                     <h2 class="lead"><b><?php echo $user_data['nama']; ?></b></h2>
                   </div>
                   <div class="card-body pt-0">
                     <div class="row">
                       <div class="col-12 text-center">
-                        <img src="../admin/img/produk/<?php echo $user_data['foto1'] ?>" alt="produk"  width="200px" height="230px" class="product-image">
+                        <img src="../admin/img/produk/<?php echo $user_data['foto1'] ?>" alt="produk" width="200px" height="230px" class="product-image"><br>
                       </div>
-                      <div class="col-12">
+                      <div class="col-12 text-center">
                         <h1 class="lead"><b>Rp.<?php echo number_format($user_data['harga'], 0, ',', '.') ?></b></h1>
-                        <p class="text-muted text-sm"><?php echo $user_data['nama']; ?></p>
 
+                        <?php
+                        $rates = mysqli_query($conn, "SELECT (SUM(rating.rate) / COUNT(id_produk)) as rate FROM produk 
+                        LEFT JOIN rating on rating.produk=produk.id_produk 
+                        LEFT JOIN pelanggan on pelanggan.id_pel=rating.pelanggan 
+                        WHERE rating.produk = " . $user_data['id_produk'] . " GROUP BY produk.id_produk ASC");
+                         $rate=0;
+                         while ($user_data = mysqli_fetch_array($rates)) { 
+                           $rate = $user_data['rate'];
+                         }
+                          settype($rate, "integer");
+                          // var_dump($rate);
+                          if ($rate == 5) {
+                        ?><span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star checked-2"></span>
+                            <span class="fa fa-star checked-3"></span>
+                            <span class="fa fa-star checked-4"></span>
+                            <span class="fa fa-star checked-5"></span>
+                          <?php } else if ($rate == 4) { ?>
+                            <span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star checked-2"></span>
+                            <span class="fa fa-star checked-3"></span>
+                            <span class="fa fa-star checked-4"></span>
+                            <span class="fa fa-star"></span>
+                          <?php } else if ($rate == 3) { ?>
+                            <span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star checked-2"></span>
+                            <span class="fa fa-star checked-3"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                          <?php } else if ($rate == 2) { ?>
+                            <span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star checked-2"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                          <?php } else if ($rate == 1) { ?>
+                            <span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                          <?php  } else if ($rate == 0) { ?>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                          <?php  } else if (empty($rate)) { ?>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        <?php  }
+                         ?>
                       </div>
                     </div>
                   </div>
                   <div class="card-footer">
                     <div class="text-right">
                       <button type="submit" class="btn btn-sm btn-warning">
-                        <i class="fas fa-basket"></i> Keranjang
+                        <i class="fa fa-shopping-basket"></i> Keranjang
                       </button>
                       <a href="detail_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>" class="btn btn-sm btn-info">
-                        <i class="fas fa-basket"></i> Lihat
+                        <i class="fa fa-eye"></i> Lihat
                       </a>
                     </div>
                   </div>
@@ -74,20 +128,7 @@
           <?php } ?>
         </div>
       </div>
-      <!-- /.card-body -->
-      <!-- <div class="card-footer">
-          <nav aria-label="Contacts Page Navigation">
-            <ul class="pagination justify-content-center m-0">
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-            </ul>
-          </nav>
-        </div> -->
-      <!-- /.card-footer -->
-    </div>
+    </div><br>
     <!-- /.card -->
 
   </section>
