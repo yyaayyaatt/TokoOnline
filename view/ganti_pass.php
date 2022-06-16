@@ -48,8 +48,8 @@ include_once("../admin/config/connection.php"); ?>
                     <input type="text" name="passx" placeholder="Ulangi Password baru" class="form-control" required>
                   </div>
 
-                  <button type="submit" class="btn btn-success">SIMPAN</button>
-                  <button type="reset" class="btn btn-warning">RESET</button>
+                  <button type="submit" class="btn btn-success"> <i class="fa fa-save"></i> SIMPAN</button>
+                  <button type="reset" class="btn btn-warning"> <i class="fa fa-reset"></i> RESET</button>
                 </form>
               </div>
             </div>
