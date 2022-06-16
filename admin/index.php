@@ -86,7 +86,7 @@ $invoice = mysqli_query($conn, "SELECT * FROM transaksi ORDER BY no ASC");
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Master
-              <i class="right fas fa-angle-left"></i>
+              <i class="right fa fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -182,14 +182,14 @@ $invoice = mysqli_query($conn, "SELECT * FROM transaksi ORDER BY no ASC");
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3><?php echo mysqli_num_rows($pelanggan); ?></h3>
+                  <h2><?php echo mysqli_num_rows($pelanggan); ?></h2>
 
-                  <p>Pelanggan</p>
+                  <h4>Pelanggan</h4>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="fa fa-user"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="view/pelanggan.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -197,14 +197,14 @@ $invoice = mysqli_query($conn, "SELECT * FROM transaksi ORDER BY no ASC");
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3><?php echo mysqli_num_rows($produk); ?></h3>
+                  <h2><?php echo mysqli_num_rows($produk); ?></h2>
 
-                  <p>Produk</p>
+                  <h4>Produk</h4>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="fa fa-box"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="view/produk.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -212,14 +212,14 @@ $invoice = mysqli_query($conn, "SELECT * FROM transaksi ORDER BY no ASC");
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3><?php echo mysqli_num_rows($invoice); ?></h3>
+                  <h2><?php echo mysqli_num_rows($invoice); ?></h2>
 
-                  <p>invoice</p>
+                  <h4>Transaksi</h4>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="fa fa-bookmark"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="view/transaksi.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
