@@ -139,7 +139,7 @@ $invoice = mysqli_query($conn, "SELECT * FROM transaksi ORDER BY no ASC");
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../admin/controller/logout.php" class="nav-link">
+              <a href="../controller/logout.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Logout</p>
               </a>
