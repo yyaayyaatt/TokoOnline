@@ -41,4 +41,4 @@ if (!mysqli_commit($conn)) {
 
 // Close connection
 mysqli_close($conn);
-// header("location: ../view/transaksi.php");
+header("location: ../view/transaksi.php");
