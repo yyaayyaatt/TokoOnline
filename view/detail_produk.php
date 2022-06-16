@@ -1,5 +1,5 @@
 <?php include "../layout/header.php" ?>
-<?php 
+<?php
 include_once("../admin/config/connection.php"); ?>
 <?php
 $id = $_GET['id_produk'];
@@ -48,12 +48,67 @@ $row = mysqli_fetch_array($result);
               <h2 class="mb-0">
                 Rp.<?php echo number_format($row['harga'], 0, ',', '.') ?>
               </h2>
+              <?php
+              $rates = mysqli_query($conn, "SELECT (SUM(rating.rate) / COUNT(id_produk)) as rate FROM produk 
+                        LEFT JOIN rating on rating.produk=produk.id_produk 
+                        LEFT JOIN pelanggan on pelanggan.id_pel=rating.pelanggan 
+                        WHERE rating.produk = " . $row['id_produk'] . " GROUP BY produk.id_produk ASC");
+              $rate = 0;
+              while ($data = mysqli_fetch_array($rates)) {
+                $rate = $data['rate'];
+              }
+              settype($rate, "integer");
+              // var_dump($rate);
+              if ($rate == 5) {
+              ?><h4><span class="fa fa-star checked-1"></span>
+                <span class="fa fa-star checked-2"></span>
+                <span class="fa fa-star checked-3"></span>
+                <span class="fa fa-star checked-4"></span>
+                <span class="fa fa-star checked-5"></span>
+              <?php } else if ($rate == 4) { ?>
+                <span class="fa fa-star checked-1"></span>
+                <span class="fa fa-star checked-2"></span>
+                <span class="fa fa-star checked-3"></span>
+                <span class="fa fa-star checked-4"></span>
+                <span class="fa fa-star"></span>
+              <?php } else if ($rate == 3) { ?>
+                <span class="fa fa-star checked-1"></span>
+                <span class="fa fa-star checked-2"></span>
+                <span class="fa fa-star checked-3"></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star "></span>
+              <?php } else if ($rate == 2) { ?>
+                <span class="fa fa-star checked-1"></span>
+                <span class="fa fa-star checked-2"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              <?php } else if ($rate == 1) { ?>
+                <span class="fa fa-star checked-1"></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star "></span>
+              <?php  } else if ($rate == 0) { ?>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              <?php  } else if (empty($rate)) { ?>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              <?php  }
+              ?></h4>
             </div>
 
             <div class="mt-4">
               <form action="../controller/add_chart.php" method="POST">
                 <input type="hidden" name="id_produk" value="<?php echo $row['id_produk']; ?>">
-            <input type="hidden" name="pelanggan" value="<?php echo $_SESSION['id_pel']?>">
+                <input type="hidden" name="pelanggan" value="<?php echo $_SESSION['id_pel'] ?>">
                 <div>
                   <button class="btn btn-primary btn-lg btn-flat" type="submit">
                     <i class="fa fa-cart-plus fa-lg mr-2"></i>

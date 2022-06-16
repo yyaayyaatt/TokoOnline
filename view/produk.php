@@ -60,8 +60,8 @@ if (isset($_GET['id_kat'])) {
                         LEFT JOIN pelanggan on pelanggan.id_pel=rating.pelanggan 
                         WHERE rating.produk = " . $user_data['id_produk'] . " GROUP BY produk.id_produk ASC");
                          $rate=0;
-                         while ($user_data = mysqli_fetch_array($rates)) { 
-                           $rate = $user_data['rate'];
+                         while ($data = mysqli_fetch_array($rates)) { 
+                           $rate = $data['rate'];
                          }
                           settype($rate, "integer");
                           // var_dump($rate);
