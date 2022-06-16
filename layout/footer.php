@@ -35,6 +35,23 @@
   <script src="../admin/plugins/jquery/jquery.min.js"></script>
   <script src="../admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+  <style>
+  .checked-1 {
+    color:yellow;
+  }
+  .checked-2 {
+    color:Orange;
+  }
+  .checked-3 {
+    color: orangered;
+  }
+  .checked-4 {
+    color: red;
+  }
+  .checked-5 {
+    color: darkred;
+  }
+</style>
 </body>
 
 </html>
