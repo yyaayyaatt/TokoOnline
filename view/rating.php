@@ -33,6 +33,9 @@ include_once("../admin/config/connection.php"); ?>
               <div class="card-body">
                 <form action="../controller/save_rating.php" method="POST">
 
+                <div class="form-group">
+                    <img src="../admin/img/produk/<?php echo $_GET['foto'] ?>"width="200px" height="260px">
+                  </div>
                 <div class="form-group form-control">
                     <input type="radio" name="rate" value="5">
                     <span class="fa fa-star checked-1"></span>

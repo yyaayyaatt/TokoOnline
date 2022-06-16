@@ -85,7 +85,7 @@ $pelanggan = $_SESSION['id_pel']; ?>
                     <span class="badge badge-primary fa fa-box"><a href='../controller/konfirmasi.php?invoice=<?php echo $user_data['invoice'] ?>&stts=Selesai' style="color:white" > Selesaikan Transaksi</a></span>
                   <?php } ?>
                   <?php if ($user_data['status'] == "Selesai") { ?>
-                    <span class="badge badge-warning fa fa-star"><a href='../view/rating.php?id_produk=<?php echo $user_data['id_produk'] ?>&id_pel=<?php echo $pelanggan ?>' style="color:white" > Nilai Produk</a></span>
+                    <span class="badge badge-warning fa fa-star"><a href='../view/rating.php?id_produk=<?php echo $user_data['id_produk'] ?>&foto=<?php echo $user_data['foto1'] ?>' style="color:white" > Nilai Produk</a></span>
                   <?php } ?>
                 </td>
               </tr>
