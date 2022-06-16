@@ -56,7 +56,7 @@ include('admin/config/connection.php');
           <?php
           if (!isset($_SESSION['log'])) {
             echo '
-					<li><a href="registered.php"> Daftar</a></li>
+					<li><a href="register.php"> Daftar</a></li>
 					<li><a href="view/login.php">Masuk</a></li>
 					';
           } else {
