@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-lg-12 col-6">
           <div class=" float-sm-right">
-          <a href="add_pel.php" class="btn btn-info">Tambah Data</a><br /><br />
+          <a href="add_pel.php" class="btn btn-info"><i class="fas fa-plus"> Tambah Data</i></a><br /><br />
           </div>
           <table class="table table-striped">
             <tr>
@@ -50,7 +50,7 @@
               <td><?php echo $user_data['email'] ?></td>
               <td><?php echo $user_data['telp'] ?></td>
               <td><?php echo $user_data['alamat'] ?></td>
-              <td><a href='edit_pel.php?id_pel=<?php echo $user_data['id_pel']?>'>Edit</a> | <a href='../controller/delete_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'>Delete</a></td>
+              <td><a href='edit_pel.php?id_pel=<?php echo $user_data['id_pel']?>'><i class="fas fa-edit">Edit</i></a> | <a href='../controller/delete_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a></td>
               </tr>
             <?php }
             ?>

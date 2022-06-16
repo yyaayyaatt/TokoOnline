@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-lg-12 col-6 ">
           <div class=" float-sm-right">
-            <a href="add_kat.php" class="btn btn-info">Tambah Data</a><br />
+            <a href="add_kat.php" class="btn btn-info"><i class="fas fa-plus"> Tambah Data</i> </a><br />
           </div><br><br>
           <table class="table table-striped">
             <tr>
@@ -43,7 +43,7 @@
               <tr>
               <td><?php echo $user_data['id_kat'] ?></td>
               <td><?php echo $user_data['nm_kat'] ?></td>
-              <td><a href='edit_kat.php?id_kat=<?php echo $user_data['id_kat']?>'>Edit</a> | <a href='../controller/delete_kat.php?id_kat=<?php echo $user_data['id_kat'] ?>'>Delete</a></td>
+              <td><a href='edit_kat.php?id_kat=<?php echo $user_data['id_kat']?>'><i class="fas fa-edit">Edit</i></a> | <a href='../controller/delete_kat.php?id_kat=<?php echo $user_data['id_kat'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a></td>
               </tr>
             <?php }
             ?>
