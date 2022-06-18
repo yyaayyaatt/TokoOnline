@@ -64,12 +64,12 @@ include('../admin/config/connection.php');
             if ($_SESSION['role'] == 'member') { ?>
 
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="controller/logout.php">Keluar?</a></li>
+              <li><a href="../controller/logout.php">Keluar?</a></li>
             <?php
             } else { ?>
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="admin">Admin Panel</a></li>
-              <li><a href="controller/logout.php">Keluar?</a></li>
+              <li><a href="../admin">Admin Panel</a></li>
+              <li><a href="../controller/logout.php">Keluar?</a></li>
           <?php
             }
           }
@@ -78,7 +78,7 @@ include('../admin/config/connection.php');
         </ul>
       </div>
       <div class="product_list_header">
-        <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+        <a href="keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
         </a>
       </div>
       <div class="clearfix"> </div>
