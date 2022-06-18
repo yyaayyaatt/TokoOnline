@@ -211,7 +211,7 @@ include('../admin/config/connection.php');
                       <div class="col-12 text-center">
                         <img src="../admin/img/produk/<?php echo $user_data['foto1'] ?>" alt="produk"  width="200px" height="230px" class="product-image">
                       </div>
-                      <div class="col-12">
+                      <div class="col-12 text-center">
                         <h1 class="lead"><b>Rp.<?php echo number_format($user_data['harga'], 0, ',', '.') ?></b></h1>
                         <p class="text-muted text-sm"><?php echo $user_data['nama']; ?></p>
 
@@ -247,7 +247,7 @@ include('../admin/config/connection.php');
           </nav>
         </div> -->
       <!-- /.card-footer -->
-    </div>
+    </div><br>
     <!-- /.card -->
 
   </section>
