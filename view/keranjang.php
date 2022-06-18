@@ -1,5 +1,4 @@
 <?php include "../layout/header.php" ?>
-<?php include_once("../admin/config/connection.php"); ?>
 
 <?php
 $pelanggan = $_SESSION['id_pel'];
