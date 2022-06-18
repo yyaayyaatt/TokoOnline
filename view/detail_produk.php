@@ -261,6 +261,7 @@ $row = mysqli_fetch_array($result);
                 <span class="fa fa-star"></span>
               <?php  }
               ?></h4>
+              <p>Tersedia <b><?php echo $row['stok']; ?></b> Item</p>
             </div>
 
             <div class="mt-4">
