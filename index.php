@@ -79,6 +79,7 @@ include('admin/config/connection.php');
       </div>
       <div class="product_list_header">
         <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+        
         </a>
       </div>
       <div class="clearfix"> </div>
@@ -89,7 +90,7 @@ include('admin/config/connection.php');
     <div class="container">
       <div class="w3ls_logo_products_left1">
         <ul class="phone_email">
-          <li><i class="fa fa-phone" aria-hidden="true"></i>Hubungi Kami : (+62) 8970 674 135</li>
+          <li><i class="fa fa-phone" aria-hidden="true"></i>Hubungi Kami : (+62) 815-4803-2872</li>
         </ul>
       </div>
       <div class="w3ls_logo_products_left">
