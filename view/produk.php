@@ -56,20 +56,20 @@ include('../admin/config/connection.php');
           <?php
           if (!isset($_SESSION['id_pel'])) { ?>
 
-            <li><a href="register.php"> Daftar</a></li>
-            <li><a href="view/login.php">Masuk</a></li>
+            <li><a href="../register.php"> Daftar</a></li>
+            <li><a href="../login.php">Masuk</a></li>
 
             <?php } else {
 
             if ($_SESSION['role'] == 'member') { ?>
 
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="controller/logout.php">Keluar?</a></li>
+              <li><a href="../controller/logout.php">Keluar?</a></li>
             <?php
             } else { ?>
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="admin">Admin Panel</a></li>
-              <li><a href="controller/logout.php">Keluar?</a></li>
+              <li><a href="../admin">Admin Panel</a></li>
+              <li><a href="../controller/logout.php">Keluar?</a></li>
           <?php
             }
           }
