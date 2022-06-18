@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2022 at 03:36 PM
+-- Generation Time: Jun 18, 2022 at 10:29 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -49,7 +49,15 @@ CREATE TABLE IF NOT EXISTS `keranjang` (
   `id_produk` varchar(20) NOT NULL,
   `qty` int(11) NOT NULL,
   `pelanggan` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `keranjang`
+--
+
+INSERT INTO `keranjang` (`id_keranjang`, `id_produk`, `qty`, `pelanggan`) VALUES
+(1, '15', 1, 3),
+(2, '', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -66,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `konfirmasi` (
   `customer` int(11) NOT NULL,
   `bukti` varchar(100) NOT NULL,
   `tanggal` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `konfirmasi`
@@ -74,7 +82,8 @@ CREATE TABLE IF NOT EXISTS `konfirmasi` (
 
 INSERT INTO `konfirmasi` (`id_konf`, `nama`, `bank`, `nominal`, `invoice`, `customer`, `bukti`, `tanggal`) VALUES
 (5, 'Sulaiman', 'BRI', '25000.00', '20220614114318', 3, 'images.png', '2022-06-14 16:47:12'),
-(6, 'Sultan', 'MANDIRI', '75000.00', '20220614125301', 3, 'logo-baru_201007084651-572.png', '2022-06-14 17:56:53');
+(6, 'Sultan', 'MANDIRI', '75000.00', '20220614125301', 3, 'logo-baru_201007084651-572.png', '2022-06-14 17:56:53'),
+(7, 'Sultan', 'BTN', '25000.00', '20220616041101', 3, 'download.jpg', '2022-06-16 21:11:54');
 
 -- --------------------------------------------------------
 
@@ -91,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
   `telp` varchar(18) NOT NULL,
   `alamat` varchar(200) NOT NULL,
   `role` varchar(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `pelanggan`
@@ -115,16 +124,39 @@ CREATE TABLE IF NOT EXISTS `produk` (
   `harga` decimal(12,2) NOT NULL,
   `foto1` varchar(100) NOT NULL,
   `rate` int(11) NOT NULL,
-  `harga_disc` decimal(12,2) NOT NULL
+  `harga_disc` decimal(12,2) NOT NULL,
+  `stok` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `nama`, `ket`, `kategori`, `harga`, `foto1`, `rate`, `harga_disc`) VALUES
-(15, 'Wedang Uwuh', 'Wedang uwuh bisa untuk mengobatin masuk angin dan menghangatkan tubuh dari dalam, dengan bahan rempah yang berkualitas.', '7', '25000.00', 'wedang uwuh.jpg', 0, '0.00'),
-(16, 'Jahe Merah', 'Jahe merah bisa untuk mengobatin masuk angin dan menghangatkan tubuh dari dalam, dengan bahan rempah yang berkualitas.', '7', '25000.00', 'jahe merah.jpg', 0, '0.00');
+INSERT INTO `produk` (`id_produk`, `nama`, `ket`, `kategori`, `harga`, `foto1`, `rate`, `harga_disc`, `stok`) VALUES
+(15, 'Wedang Uwuh', 'Wedang uwuh bisa untuk mengobatin masuk angin dan menghangatkan tubuh dari dalam, dengan bahan rempah yang berkualitas.', '7', '25000.00', 'wedang uwuh.jpg', 0, '0.00', 8),
+(16, 'Jahe Merah', 'Jahe merah bisa untuk mengobatin masuk angin dan menghangatkan tubuh dari dalam, dengan bahan rempah yang berkualitas.', '7', '25000.00', 'jahe merah.jpg', 0, '0.00', 39);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rating`
+--
+
+CREATE TABLE IF NOT EXISTS `rating` (
+`id_rate` int(11) NOT NULL,
+  `pelanggan` int(11) NOT NULL,
+  `rate` int(11) NOT NULL,
+  `produk` int(11) NOT NULL,
+  `pesan` varchar(100) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`id_rate`, `pelanggan`, `rate`, `produk`, `pesan`) VALUES
+(1, 3, 1, 15, 'Packing jelek sekali dan tumpah kemana mana'),
+(3, 1, 5, 15, '');
 
 -- --------------------------------------------------------
 
@@ -139,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `transaksi` (
   `pelanggan` varchar(20) NOT NULL,
   `total` decimal(12,2) NOT NULL,
   `status` varchar(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `transaksi`
@@ -151,7 +183,11 @@ INSERT INTO `transaksi` (`no`, `invoice`, `tanggal`, `pelanggan`, `total`, `stat
 (13, '20220614113314', '2022-06-14', '1', '25000.00', 'Menunggu Pembayaran'),
 (14, '20220614113331', '2022-06-14', '1', '25000.00', 'Menunggu Pembayaran'),
 (15, '20220614114318', '2022-06-14', '3', '25000.00', 'Selesai'),
-(20, '20220614125301', '2022-06-14', '3', '75000.00', 'Selesai');
+(20, '20220614125301', '2022-06-14', '3', '75000.00', 'Selesai'),
+(21, '20220616041101', '2022-06-16', '3', '25000.00', 'Menunggu Konfirmasi'),
+(22, '20220618083646', '2022-06-18', '3', '25000.00', 'Menunggu Pembayaran'),
+(23, '20220618083728', '2022-06-18', '3', '25000.00', 'Menunggu Pembayaran'),
+(24, '20220618093747', '2022-06-18', '1', '25000.00', 'Menunggu Pembayaran');
 
 -- --------------------------------------------------------
 
@@ -166,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `transaksi_detail` (
   `nama` varchar(50) NOT NULL,
   `qty` int(11) NOT NULL,
   `harga` decimal(12,2) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `transaksi_detail`
@@ -176,7 +212,11 @@ INSERT INTO `transaksi_detail` (`id_detail`, `invoice`, `id_produk`, `nama`, `qt
 (2, '20220614114318', '15', 'Wedang Uwuh', 1, '25000.00'),
 (5, '20220614125301', '15', 'Wedang Uwuh', 1, '25000.00'),
 (6, '20220614125301', '15', 'Wedang Uwuh', 1, '25000.00'),
-(7, '20220614125301', '16', 'Jahe Merah', 1, '25000.00');
+(7, '20220614125301', '16', 'Jahe Merah', 1, '25000.00'),
+(8, '20220616041101', '16', 'Jahe Merah', 1, '25000.00'),
+(9, '20220618083646', '15', 'Wedang Uwuh', 1, '25000.00'),
+(10, '20220618083728', '16', 'Jahe Merah', 1, '25000.00'),
+(11, '20220618093747', '15', 'Wedang Uwuh', 1, '25000.00');
 
 --
 -- Indexes for dumped tables
@@ -213,6 +253,12 @@ ALTER TABLE `produk`
  ADD PRIMARY KEY (`id_produk`);
 
 --
+-- Indexes for table `rating`
+--
+ALTER TABLE `rating`
+ ADD PRIMARY KEY (`id_rate`);
+
+--
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
@@ -237,32 +283,37 @@ MODIFY `id_kat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `konfirmasi`
 --
 ALTER TABLE `konfirmasi`
-MODIFY `id_konf` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id_konf` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-MODIFY `id_pel` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id_pel` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
 MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
+-- AUTO_INCREMENT for table `rating`
+--
+ALTER TABLE `rating`
+MODIFY `id_rate` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-MODIFY `no` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `no` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `transaksi_detail`
 --
 ALTER TABLE `transaksi_detail`
-MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
