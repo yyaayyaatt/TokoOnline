@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['log'])) {
+if (!isset($_SESSION['id_pel'])) {
   header('location:view/login.php');
 };
 
@@ -54,25 +54,24 @@ include('admin/config/connection.php');
       <div class="agile-login">
         <ul>
           <?php
-          if (!isset($_SESSION['log'])) {
-            echo '
+          if (!isset($_SESSION['id_pel'])) {?>
+          
 					<li><a href="register.php"> Daftar</a></li>
 					<li><a href="view/login.php">Masuk</a></li>
-					';
-          } else {
+					
+          <?php } else {
 
-            if ($_SESSION['role'] == 'member') {
-              echo '
-					<li style="color:white">Halo, ' . $_SESSION["name"] . '
+            if ($_SESSION['role'] == 'member') {?>
+            
+					<li style="color:white">Halo,  <?php echo $_SESSION["name"] ?>
 					<li><a href="controller/logout.php">Keluar?</a></li>
-					';
-            } else {
-              echo '
-					<li style="color:white">Halo, ' . $_SESSION["name"] . '
+					<?php 
+            } else { ?>
+					<li style="color:white">Halo,   <?php echo $_SESSION["name"] ?>
 					<li><a href="admin">Admin Panel</a></li>
 					<li><a href="controller/logout.php">Keluar?</a></li>
-					';
-            };
+					<?php
+            }
           }
           ?>
 
