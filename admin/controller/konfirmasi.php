@@ -10,7 +10,7 @@ $pelanggan  = $_SESSION['id_pel'];
 
 //query update data ke dalam database
 $query = "UPDATE transaksi SET status = '$stts'
- WHERE invoice = '$invoice' and pelanggan= '$pelanggan'";
+ WHERE invoice = '$invoice'";
 
 //kondisi pengecekan apakah data berhasil dimasukkan atau tidak
 if($conn->query($query)) {
