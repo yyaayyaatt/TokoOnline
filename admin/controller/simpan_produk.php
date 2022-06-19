@@ -7,6 +7,7 @@ include('../config/connection.php');
 $nama            = $_POST['nama'];
 $kategori        = $_POST['kategori'];
 $harga           = $_POST['harga'];
+$stok           = $_POST['stok'];
 $ket           = $_POST['ket'];
 $eks  = array('png', 'jpg');
 $foto1 = $_FILES['foto1']['name'];
@@ -19,10 +20,10 @@ if (in_array($ekstensi, $eks) === true) {
   if ($ukuran < 1044070) {
     move_uploaded_file($file_tmp, '../img/produk/' . $foto1);
     // $query = mysql_query("INSERT INTO upload VALUES(NULL, '$nama')");
-    $query = "INSERT INTO produk (nama,ket,kategori,harga,foto1)
-          VALUES ('$nama','$ket','$kategori','$harga','$foto1')";
+    $query = "INSERT INTO produk (nama,ket,kategori,harga,foto1,stok)
+          VALUES ('$nama','$ket','$kategori','$harga','$foto1','$stok')";
     if ($query) {
-      echo 'FILE BERHASIL DI UPLOAD';
+      header("location: ../view/produk.php");
     } else {
       echo 'GAGAL MENGUPLOAD GAMBAR';
     }
