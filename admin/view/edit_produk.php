@@ -41,7 +41,7 @@
 
                   <div class="form-group">
                     <label>Nama</label>
-                    <input type="text" name="id_produk" placeholder=" Nama Produk" class="form-control" value="<?php echo $row['id_produk'] ?>" required>
+                    <input type="hidden" name="id_produk" placeholder=" Nama Produk" class="form-control" value="<?php echo $row['id_produk'] ?>" required>
                     <input type="text" name="nama" placeholder=" Nama Produk" class="form-control" value="<?php echo $row['nama'] ?>" required>
                   </div>
                   <div class="form-group">
@@ -66,6 +66,10 @@
                   <div class="form-group">
                     <label>Harga</label>
                     <input type="number" name="harga" placeholder="Harga Produk" class="form-control" value="<?php echo $row['harga'] ?>" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Stok</label>
+                    <input type="number" name="stok" placeholder="Stok Produk" class="form-control" value="<?php echo $row['stok'] ?>" required>
                   </div>
                   <div class="form-group">
                     <label>foto Produk</label>
