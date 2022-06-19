@@ -9,6 +9,7 @@ $nama            = $_POST['nama'];
 $kategori        = $_POST['kategori'];
 $ket           = $_POST['ket'];
 $harga           = $_POST['harga'];
+$stok           = $_POST['stok'];
 $foto1           = $_FILES['foto']['name'];
 $foto_current    = $_POST['foto_current'];
 
@@ -23,7 +24,7 @@ if (!empty($foto1)) {
     if ($ukuran < 1044070) {
       move_uploaded_file($file_tmp, '../img/produk/' . $foto1);
       // $query = mysql_query("INSERT INTO upload VALUES(NULL, '$nama')");
-      $query = "UPDATE produk set nama='$nama',ket='$ket',kategori='$kategori',harga='$harga',foto1='$foto1' where id_produk='$id_produk'";
+      $query = "UPDATE produk set nama='$nama',ket='$ket',kategori='$kategori',harga='$harga',stok='$stok',foto1='$foto1' where id_produk='$id_produk'";
       if ($query) {
         echo 'FILE BERHASIL DI UPLOAD';
       } else {
@@ -47,7 +48,7 @@ if (!empty($foto1)) {
     echo "Data Gagal Disimpan!";
   }
 } else if (empty($foto1)) {
-  $query = "UPDATE produk set nama='$nama',ket='$ket',kategori='$kategori',harga='$harga',foto1='$foto_current' where id_produk='$id_produk'";
+  $query = "UPDATE produk set nama='$nama',ket='$ket',kategori='$kategori',harga='$harga',stok='$stok',foto1='$foto_current' where id_produk='$id_produk'";
       if ($query) {
         echo 'FILE BERHASIL DI UPLOAD';
       } else {
