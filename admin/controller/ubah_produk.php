@@ -26,7 +26,7 @@ if (!empty($foto1)) {
       // $query = mysql_query("INSERT INTO upload VALUES(NULL, '$nama')");
       $query = "UPDATE produk set nama='$nama',ket='$ket',kategori='$kategori',harga='$harga',stok='$stok',foto1='$foto1' where id_produk='$id_produk'";
       if ($query) {
-        echo 'FILE BERHASIL DI UPLOAD';
+        header("location: ../view/produk.php");
       } else {
         echo 'GAGAL MENGUPLOAD GAMBAR';
       }
@@ -50,7 +50,7 @@ if (!empty($foto1)) {
 } else if (empty($foto1)) {
   $query = "UPDATE produk set nama='$nama',ket='$ket',kategori='$kategori',harga='$harga',stok='$stok',foto1='$foto_current' where id_produk='$id_produk'";
       if ($query) {
-        echo 'FILE BERHASIL DI UPLOAD';
+        header("location: ../view/produk.php");
       } else {
         echo 'GAGAL MENGUPLOAD GAMBAR';
       }
