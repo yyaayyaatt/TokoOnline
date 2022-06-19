@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2022 at 10:29 PM
+-- Generation Time: Jun 19, 2022 at 09:41 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -56,8 +56,7 @@ CREATE TABLE IF NOT EXISTS `keranjang` (
 --
 
 INSERT INTO `keranjang` (`id_keranjang`, `id_produk`, `qty`, `pelanggan`) VALUES
-(1, '15', 1, 3),
-(2, '', 1, 3);
+(1, '15', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -74,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `konfirmasi` (
   `customer` int(11) NOT NULL,
   `bukti` varchar(100) NOT NULL,
   `tanggal` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `konfirmasi`
@@ -83,7 +82,8 @@ CREATE TABLE IF NOT EXISTS `konfirmasi` (
 INSERT INTO `konfirmasi` (`id_konf`, `nama`, `bank`, `nominal`, `invoice`, `customer`, `bukti`, `tanggal`) VALUES
 (5, 'Sulaiman', 'BRI', '25000.00', '20220614114318', 3, 'images.png', '2022-06-14 16:47:12'),
 (6, 'Sultan', 'MANDIRI', '75000.00', '20220614125301', 3, 'logo-baru_201007084651-572.png', '2022-06-14 17:56:53'),
-(7, 'Sultan', 'BTN', '25000.00', '20220616041101', 3, 'download.jpg', '2022-06-16 21:11:54');
+(7, 'Sultan', 'BTN', '25000.00', '20220616041101', 3, 'download.jpg', '2022-06-16 21:11:54'),
+(8, 'Sultan', 'BNI', '12000.00', '20220618083646', 3, 'logo-baru_201007084651-572.png', '2022-06-19 14:03:19');
 
 -- --------------------------------------------------------
 
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama`, `ket`, `kategori`, `harga`, `foto1`, `rate`, `harga_disc`, `stok`) VALUES
-(15, 'Wedang Uwuh', 'Wedang uwuh bisa untuk mengobatin masuk angin dan menghangatkan tubuh dari dalam, dengan bahan rempah yang berkualitas.', '7', '25000.00', 'wedang uwuh.jpg', 0, '0.00', 8),
+(15, 'Wedang Uwuh', 'Wedang uwuh bisa untuk mengobatin masuk angin dan menghangatkan tubuh dari dalam, dengan bahan rempah yang berkualitas.', '7', '25000.00', 'wedang uwuh.jpg', 0, '0.00', 80),
 (16, 'Jahe Merah', 'Jahe merah bisa untuk mengobatin masuk angin dan menghangatkan tubuh dari dalam, dengan bahan rempah yang berkualitas.', '7', '25000.00', 'jahe merah.jpg', 0, '0.00', 39);
 
 -- --------------------------------------------------------
@@ -184,8 +184,8 @@ INSERT INTO `transaksi` (`no`, `invoice`, `tanggal`, `pelanggan`, `total`, `stat
 (14, '20220614113331', '2022-06-14', '1', '25000.00', 'Menunggu Pembayaran'),
 (15, '20220614114318', '2022-06-14', '3', '25000.00', 'Selesai'),
 (20, '20220614125301', '2022-06-14', '3', '75000.00', 'Selesai'),
-(21, '20220616041101', '2022-06-16', '3', '25000.00', 'Menunggu Konfirmasi'),
-(22, '20220618083646', '2022-06-18', '3', '25000.00', 'Menunggu Pembayaran'),
+(21, '20220616041101', '2022-06-16', '3', '25000.00', 'Bayar'),
+(22, '20220618083646', '2022-06-18', '3', '25000.00', 'Bayar'),
 (23, '20220618083728', '2022-06-18', '3', '25000.00', 'Menunggu Pembayaran'),
 (24, '20220618093747', '2022-06-18', '1', '25000.00', 'Menunggu Pembayaran');
 
@@ -288,7 +288,7 @@ MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `konfirmasi`
 --
 ALTER TABLE `konfirmasi`
-MODIFY `id_konf` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id_konf` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
