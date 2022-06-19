@@ -12,7 +12,7 @@ $customer     = $_SESSION['id_pel'];
 
 $cek = "Select COUNT(id_rate) from rating where pelanggan='$customer' and prooduk='$id_produk'";
 $query = mysqli_query($conn, $cek);
-var_dump(isset($query));
+// var_dump(isset($query));
 if (!isset($query)) {
     //query insert data ke dalam database
     $query2 = "INSERT INTO rating (pelanngan,rate,produk,pesan) 
