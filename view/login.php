@@ -35,7 +35,7 @@ if (isset($_SESSION['log'])) {
 
         <form action="../controller/login.php" method="post">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="user" placeholder="user">
+            <input type="text" class="form-control" name="user" placeholder="User">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-users"></span>
@@ -55,7 +55,10 @@ if (isset($_SESSION['log'])) {
             <div class="col-12">
               <button type="submit" class="btn btn-primary btn-block">Masuk</button>
             </div>
+            <div class="col-12">
+            <a href="register.php" class="btn btn-success btn-block">Daftar</a>
             <!-- /.col -->
+            </div>
           </div>
         </form>
 
@@ -73,9 +76,9 @@ if (isset($_SESSION['log'])) {
       <p class="mb-1">
         <a href="forgot-password.html">I forgot my password</a>
       </p> -->
-        <p class="mb-0">
-          <a href="register.php" class="text-center">Daftar</a>
-        </p>
+        <!-- <p class="mb-0">
+          <a href="register.php" class="btn btn-secondary btn-block">Daftar</a>
+        </p> -->
       </div>
       <!-- /.login-card-body -->
     </div>
