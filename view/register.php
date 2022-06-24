@@ -31,11 +31,11 @@ if (isset($_SESSION['log'])) {
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">halaman Register untuk Pelanggan</p>
+        <p class="login-box-msg">Halaman Register Untuk Pelanggan</p>
 
         <form action="../controller/register.php" method="post">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="nama" placeholder="nama">
+            <input type="text" class="form-control" name="nama" placeholder="Nama">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-users"></span>
@@ -67,7 +67,7 @@ if (isset($_SESSION['log'])) {
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="user" placeholder="user">
+            <input type="text" class="form-control" name="user" placeholder="User">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
