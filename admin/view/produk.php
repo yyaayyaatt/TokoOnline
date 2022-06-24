@@ -38,6 +38,7 @@
               <th>KATEGORI</th>
               <th>HARGA</th>
               <th>STOK</th>
+              <th>RATING</th>
               <th>FOTO</th>
               <th width="20%">AKSI</th>
             </tr>
@@ -51,6 +52,63 @@
               <td><?php echo $user_data['nm_kat'] ?></td>
               <td>Rp.<?php echo number_format($user_data['harga'],2,',','.') ?></td>
               <td><?php echo $user_data['stok'] ?></td>
+              <td>
+              <?php
+                        $rates = mysqli_query($conn, "SELECT (SUM(rating.rate) / COUNT(id_produk)) as rate FROM produk
+                        LEFT JOIN rating on rating.produk=produk.id_produk
+                        LEFT JOIN pelanggan on pelanggan.id_pel=rating.pelanggan
+                        WHERE rating.produk = " . $user_data['id_produk'] . " GROUP BY produk.id_produk");
+                         $rate=0;
+                         while ($data = mysqli_fetch_array($rates)) {
+                           $rate = $data['rate'];
+                         }
+                          settype($rate, "integer");
+                          // var_dump($rate);
+                          if ($rate == 5) {
+                        ?><span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star checked-2"></span>
+                            <span class="fa fa-star checked-3"></span>
+                            <span class="fa fa-star checked-4"></span>
+                            <span class="fa fa-star checked-5"></span>
+                          <?php } else if ($rate == 4) { ?>
+                            <span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star checked-2"></span>
+                            <span class="fa fa-star checked-3"></span>
+                            <span class="fa fa-star checked-4"></span>
+                            <span class="fa fa-star"></span>
+                          <?php } else if ($rate == 3) { ?>
+                            <span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star checked-2"></span>
+                            <span class="fa fa-star checked-3"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                          <?php } else if ($rate == 2) { ?>
+                            <span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star checked-2"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                          <?php } else if ($rate == 1) { ?>
+                            <span class="fa fa-star checked-1"></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                            <span class="fa fa-star "></span>
+                          <?php  } else if ($rate == 0) { ?>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                          <?php  } else if (empty($rate)) { ?>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        <?php  }
+                         ?>
+              </td>
               <td><img src="../img/produk/<?php echo $user_data['foto1'] ?>" alt="foto produk" width="50px"></td>
               <td><a href='edit_produk.php?id_produk=<?php echo $user_data['id_produk']?>'><i class="fas fa-edit">Edit</i></a> | <a href='../controller/delete_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>&foto=<?php echo $user_data['foto1'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a></td>
               </tr>

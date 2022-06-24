@@ -48,6 +48,23 @@
   <!-- <script src="dist/js/demo.js"></script> -->
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="../dist/js/pages/dashboard.js"></script>
+<style>
+  .checked-1 {
+    color:yellow;
+  }
+  .checked-2 {
+    color:Orange;
+  }
+  .checked-3 {
+    color: orangered;
+  }
+  .checked-4 {
+    color: red;
+  }
+  .checked-5 {
+    color: darkred;
+  }
+</style>
 </body>
 
 </html>
