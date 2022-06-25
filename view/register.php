@@ -11,7 +11,7 @@ if (isset($_SESSION['log'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Register</title>
+  <title>Registrasi</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -26,12 +26,12 @@ if (isset($_SESSION['log'])) {
 <body class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a href="#">Register Pelanggan</a>
+      <a href="#">Registrasi Pelanggan</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Halaman Register Untuk Pelanggan</p>
+        <p class="login-box-msg">Halaman Registrasi Untuk Pelanggan</p>
 
         <form action="../controller/register.php" method="post">
           <div class="input-group mb-3">
