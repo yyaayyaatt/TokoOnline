@@ -67,7 +67,7 @@ if (isset($_SESSION['log'])) {
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="user" placeholder="User">
+            <input type="text" class="form-control" name="user" placeholder="Username">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
