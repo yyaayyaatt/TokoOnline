@@ -25,8 +25,8 @@ if($row != NULL) {
 } else {
 
     //pesan error gagal insert data
-    echo "Data Gagal Disimpan!";
-    header("location:../view/login.php");
+    echo "<script>alert('Login Gagal');window.location.href='../view/login.php';</script>";
+    // header("location:../view/login.php");
 
 }
 
