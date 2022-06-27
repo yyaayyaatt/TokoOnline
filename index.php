@@ -51,42 +51,39 @@ include('admin/config/connection.php');
       <div class="w3l_offers">
         <p>DAPATKAN PENAWARAN MENARIK KHUSUS HARI INI, BELANJA SEKARANG!</p>
       </div>
-      <div class="agile-login">
+      <div class="agile-login" style="text-align: right;">
         <ul>
+            <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+            </a>
           <?php
-          if (!isset($_SESSION['id_pel'])) {?>
-          
-					<li><a href="register.php"> Daftar</a></li>
-					<li><a href="view/login.php">Masuk</a></li>
-					
-          <?php } else {
+          if (!isset($_SESSION['id_pel'])) { ?>
 
-            if ($_SESSION['role'] == 'member') {?>
-            
-					<li style="color:white">Halo,  <?php echo $_SESSION["name"] ?>
-					<li><a href="controller/logout.php">Keluar?</a></li>
-					<?php 
+            <li><a href="register.php"> Daftar</a></li>
+            <li><a href="view/login.php">Masuk</a></li>
+        
+            <?php } else {
+
+            if ($_SESSION['role'] == 'member') { ?>
+
+              <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
+              <li><a href="controller/logout.php">Keluar?</a></li>
+            <?php
             } else { ?>
-					<li style="color:white">Halo,   <?php echo $_SESSION["name"] ?>
-					<li><a href="admin">Admin Panel</a></li>
-					<li><a href="controller/logout.php">Keluar?</a></li>
-					<?php
+              <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
+              <li><a href="admin">Admin Panel</a></li>
+              <li><a href="controller/logout.php">Keluar?</a></li>
+          <?php
             }
           }
           ?>
 
         </ul>
       </div>
-      <div class="product_list_header">
-        <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-        
-        </a>
-      </div>
       <div class="clearfix"> </div>
     </div>
   </div>
 
-  <div class="logo_products">
+  <div style="background-color: white; height: 100px; padding: 20px;">
     <div class="container">
       <div class="w3ls_logo_products_left1">
         <ul class="phone_email">
@@ -221,10 +218,10 @@ include('admin/config/connection.php');
                   <div class="card-footer">
                     <div class="text-right">
                       <button type="submit" class="btn btn-sm btn-warning">
-                        <i class="fas fa-basket"></i> Keranjang
+                        <span class="fa fa-cart-arrow-down"></span> Keranjang
                       </button>
                       <a href="view/detail_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>&pelanggan=<?php echo $_SESSION['id_pel'] ?>" class="btn btn-sm btn-info">
-                        <i class="fas fa-basket"></i> Lihat
+                        <i class="fa fa-eye"></i> Lihat
                       </a>
                     </div>
                   </div>
@@ -237,24 +234,24 @@ include('admin/config/connection.php');
     </div>
   </div>
   <div style="background-color: #FF8C00;">
-  <footer class="main-footer">
-    <div class="row" style="padding: 40px;">
-      <div class="col-sm-8 text text-light" style="padding: 20px;">
-        <h2>Kontak</h2><br>
-        <i class="fa fa-user"></i> Jl. Sikepluh Raya, Kec. Kramat, Kab. Tegal<br>
-        <i class="fa fa-phone"></i> +62 815-4803-2872 <br>
-      </div>
-      <div class="col-sm-4 text text-light" style="padding: 20px;">
-        <h2>Sosial Media</h2><br>
-        <i class="fa fa-facebook"> <a href="https://www.facebook.com/profile.php?id=100078120048945" class=" text-light">Facebook</a></i> <br>
-        <i class="fa fa-instagram text-light"> <a href="https://instagram.com/larieskaaherbal?igshid=YmMyMTA2M2Y=" class=" text-light">Instagram</a></i> <br>
-      </div>
-    <div class="col-sm-12 text text-light" style="padding-top: 20px; text-align: center;">
-      <hr class="new5">
-      Copyright &copy; 2014-2021 <a href="#" class=" text-light">Griya Herbal Larieskaa</a>.
-      All rights reserved.
-    </div>
-  </footer>
+    <footer class="main-footer">
+      <div class="row" style="padding: 40px;">
+        <div class="col-sm-8 text text-light" style="padding: 20px;">
+          <h2>Kontak</h2><br>
+          <i class="fa fa-user"></i> Jl. Sikepluh Raya, Kec. Kramat, Kab. Tegal<br>
+          <i class="fa fa-phone"></i> +62 815-4803-2872 <br>
+        </div>
+        <div class="col-sm-4 text text-light" style="padding: 20px;">
+          <h2>Sosial Media</h2><br>
+          <i class="fa fa-facebook"> <a href="https://www.facebook.com/profile.php?id=100078120048945" class=" text-light">Facebook</a></i> <br>
+          <i class="fa fa-instagram text-light"> <a href="https://instagram.com/larieskaaherbal?igshid=YmMyMTA2M2Y=" class=" text-light">Instagram</a></i> <br>
+        </div>
+        <div class="col-sm-12 text text-light" style="padding-top: 20px; text-align: center;">
+          <hr class="new5">
+          Copyright &copy; 2014-2021 <a href="#" class=" text-light">Griya Herbal Larieskaa</a>.
+          All rights reserved.
+        </div>
+    </footer>
   </div>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
