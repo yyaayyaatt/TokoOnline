@@ -193,15 +193,15 @@ include('../admin/config/connection.php');
                     <table class="table table-striped">
                   <tr>
                     <th>No. Rekening</th>
-                    <td>89897998</td>
+                    <td>0471376468</td>
                   </tr>
                   <tr>
                     <th>Atas Nama</th>
-                    <td>Griya Herbal Larieskaa</td>
+                    <td>SITI ROBIAH</td>
                   </tr>
                   <tr>
                     <th>Bank</th>
-                    <td>BRI</td>
+                    <td>BCA</td>
                   </tr>
                 </table>
                 <label>Mohon melakukan transfer ke nomor rekening diatas, kemudian setelah itu lakukan konfirmasi pembayaran dengan mengisi form berikut ini:</label>
