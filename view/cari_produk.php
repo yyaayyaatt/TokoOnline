@@ -53,6 +53,8 @@ include('../admin/config/connection.php');
       </div>
       <div class="agile-login">
         <ul>
+        <a href="keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+        </a>
           <?php
           if (!isset($_SESSION['id_pel'])) { ?>
 
@@ -76,10 +78,6 @@ include('../admin/config/connection.php');
           ?>
 
         </ul>
-      </div>
-      <div class="product_list_header">
-        <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-        </a>
       </div>
       <div class="clearfix"> </div>
     </div>
