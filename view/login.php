@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (isset($_SESSION['log'])) {
   header('location:../index.php');
@@ -11,7 +11,7 @@ if (isset($_SESSION['log'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in</title>
+  <title>Griya Herbal Larieskaa | Log in</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -35,7 +35,7 @@ if (isset($_SESSION['log'])) {
 
         <form action="../controller/login.php" method="post">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="user" placeholder="User">
+            <input type="text" class="form-control" name="user" placeholder="Username" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-users"></span>
@@ -43,21 +43,24 @@ if (isset($_SESSION['log'])) {
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" name="password" placeholder="Password">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password"required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
               </div>
             </div>
           </div>
+          <div class="label-control">
+            <input type="checkbox" onclick="show()"> Show Password
+          </div><br>
           <div class="row">
             <!-- /.col -->
             <div class="col-12">
               <button type="submit" class="btn btn-primary btn-block">Masuk</button>
             </div>
             <div class="col-12">
-            <a href="register.php" class="btn btn-success btn-block">Daftar</a>
-            <!-- /.col -->
+              <a href="register.php" class="btn btn-success btn-block">Daftar</a>
+              <!-- /.col -->
             </div>
           </div>
         </form>
@@ -91,6 +94,16 @@ if (isset($_SESSION['log'])) {
   <script src="../admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../admin/dist/js/adminlte.min.js"></script>
+  <script>
+    function show() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+  </script>
 </body>
 
 </html>
