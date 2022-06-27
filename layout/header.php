@@ -51,8 +51,10 @@ include('../admin/config/connection.php');
       <div class="w3l_offers">
         <p>DAPATKAN PENAWARAN MENARIK KHUSUS HARI INI, BELANJA SEKARANG!</p>
       </div>
-      <div class="agile-login">
+      <div class="agile-login" style="text-align: right;">
         <ul>
+            <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+            </a>
           <?php
           if (!isset($_SESSION['id_pel'])) { ?>
 
@@ -74,12 +76,7 @@ include('../admin/config/connection.php');
             }
           }
           ?>
-
         </ul>
-      </div>
-      <div class="product_list_header">
-        <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-        </a>
       </div>
       <div class="clearfix"> </div>
     </div>
