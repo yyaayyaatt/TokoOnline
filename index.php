@@ -53,14 +53,14 @@ include('admin/config/connection.php');
       </div>
       <div class="agile-login" style="text-align: right;">
         <ul>
-            <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-            </a>
+          <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+          </a>
           <?php
           if (!isset($_SESSION['id_pel'])) { ?>
 
             <li><a href="register.php"> Daftar</a></li>
             <li><a href="view/login.php">Masuk</a></li>
-        
+
             <?php } else {
 
             if ($_SESSION['role'] == 'member') { ?>
@@ -218,7 +218,7 @@ include('admin/config/connection.php');
                   <div class="card-footer">
                     <div class="text-right">
                       <button type="submit" class="btn btn-sm btn-warning">
-                        <span class="fa fa-cart-arrow-down"></span> Keranjang
+                        <span class="fa fa-cart-arrow-down"></span>
                       </button>
                       <a href="view/detail_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>&pelanggan=<?php echo $_SESSION['id_pel'] ?>" class="btn btn-sm btn-info">
                         <i class="fa fa-eye"></i> Lihat
