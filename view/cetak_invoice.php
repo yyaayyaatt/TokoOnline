@@ -3,7 +3,7 @@
 include('../admin/config/connection.php');
 
 $invoice = $_GET['invoice'];
-$query = mysqli_query($conn, "SELECT konfirmasi.*,transaksi.no FROM konfirmasi inner join transaksi on transaksi.invoice=konfirmasi.invoice where konfirmasi.invoice='$invoice' limit 1");
+$query = mysqli_query($conn, "SELECT konfirmasi.*,transaksi.no,transaksi.resi,transaksi.ongkir FROM konfirmasi inner join transaksi on transaksi.invoice=konfirmasi.invoice where konfirmasi.invoice='$invoice' limit 1");
 $trans = mysqli_fetch_assoc($query);
 ?>
 <!DOCTYPE html>
@@ -39,7 +39,7 @@ $trans = mysqli_fetch_assoc($query);
             <td><b>Griya Herbal Larieskaa</b><br>Sikepluh Raya, Kecamatan Kramat<br>Kabupaten Tegal<br>Indonesia - Jawa Tengah<br>Phone +62 815-4803-2872
             </td>
             <td><b><?php echo $_SESSION['name'] ?></b><br><?php echo $_SESSION['addrs'] ?><br><?php echo $_SESSION['phone'] ?><br><?php echo $_SESSION['email'] ?></td>
-            <td><b>Transaction Code: <?php echo $trans['no']; ?><br>Payment Date: <?php echo date('d-m-Y', strtotime($trans['tanggal'])); ?><br>Bank transfer: <?php echo $trans['bank']; ?></b></td>
+            <td><b>Transaction Code: <?php echo $trans['no']; ?><br>Payment Date: <?php echo date('d-m-Y', strtotime($trans['tanggal'])); ?><br>Bank transfer: <?php echo $trans['bank']; ?><br>No.Resi: <?php echo $trans['resi']; ?></br></td>
         </tr>
     </table><br>
     <table class="table table-striped" style="width: 100%;">
@@ -62,13 +62,17 @@ $trans = mysqli_fetch_assoc($query);
         }
         ?>
         <tr>
+            <td colspan="2" align="right" style="font-size: 14pt; font-weight: bold;">Ongkir:</td>
+            <td align="right" style="font-size: 14pt; font-weight: bold;"><?php echo  number_format($trans['ongkir'], 0, ',', '.') ?></td>
+        </tr>
+        <tr>
             <td colspan="2" align="right" style="font-size: 14pt; font-weight: bold;">Total:</td>
-            <td align="right" style="font-size: 14pt; font-weight: bold;"><?php echo number_format($total, 0, ',', '.') ?></td>
+            <td align="right" style="font-size: 14pt; font-weight: bold;"><?php echo number_format($total + $trans['ongkir'], 0, ',', '.') ?></td>
         </tr>
     </table>
 </body>
 <script>
-  window.addEventListener("load", window.print());
+    window.addEventListener("load", window.print());
 </script>
 
 </html>
