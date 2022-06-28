@@ -274,7 +274,7 @@ include('../admin/config/connection.php');
                     <div class="card-footer">
                       <div class="text-right">
                         <button type="submit" class="btn btn-sm btn-warning">
-                          <i class="fa fa-shopping-basket"></i> Keranjang
+                          <i class="fa fa-shopping-basket"></i>
                         </button>
                         <a href="detail_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>" class="btn btn-sm btn-info">
                           <i class="fa fa-eye"></i> Lihat
