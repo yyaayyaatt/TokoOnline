@@ -11,6 +11,7 @@ if($conn->query($query)) {
   header("location: ../view/keranjang.php");
 } else {
     echo "DATA GAGAL DIHAPUS!";
+    header("location: ../view/keranjang.php");
 }
 
 ?>
