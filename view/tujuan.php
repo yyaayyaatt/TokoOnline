@@ -53,8 +53,6 @@ include('../admin/config/connection.php');
       </div>
       <div class="agile-login">
         <ul>
-          <a href="keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-          </a>
           <?php
           if (!isset($_SESSION['id_pel'])) { ?>
 
@@ -78,6 +76,10 @@ include('../admin/config/connection.php');
           ?>
 
         </ul>
+      </div>
+      <div class="product_list_header">
+        <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+        </a>
       </div>
       <div class="clearfix"> </div>
     </div>
@@ -157,109 +159,95 @@ include('../admin/config/connection.php');
       </div>
   </div>
   </nav><br>
-  <?
-  ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Selesaikan Transaksi</h1>
-          </div>
+            <h1 class="m-0">Tujuan Pengiriman</h1>
+          </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Transaksi</li>
+              <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+              <li class="breadcrumb-item active">Tujuan </li>
             </ol>
-          </div>
-        </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
       </div><!-- /.container-fluid -->
-    </section>
+    </div>
+    <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
-
-      <!-- Default box -->
-      <div class="card card-solid">
-        <div class="card-body pb-0">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="container">
           <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="form-group">
+                    <table class="table table-striped">
+                      <tr>
+                        <th>No. Rekening</th>
+                        <td>0471376468</td>
+                      </tr>
+                      <tr>
+                        <th>Atas Nama</th>
+                        <td>SITI ROBIAH</td>
+                      </tr>
+                      <tr>
+                        <th>Bank</th>
+                        <td>BCA</td>
+                      </tr>
+                    </table>
+                    <label>Mohon melakukan transfer ke nomor rekening diatas, kemudian setelah itu lakukan konfirmasi pembayaran dengan mengisi form berikut ini:</label>
+                  </div>
+                  <form action="../controller/konf_bayar.php" method="POST" enctype="multipart/form-data">
 
-            <div class="col-sm-12 callout callout-info">
-              <h5><i class="fa fa-info"></i> Catatan:</h5>
-              Mohon cek kembali belanjaan anda sebelum melanjutkan transaksi, terima kasih.
+                    <div class="form-group">
+                      <label>Nama Rekening</label>
+                      <input type="hidden" name="invoice" value="<?php echo $_GET['invoice']; ?>" required>
+                      <input type="text" name="nama" placeholder="a.n. rekening bank anda" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Nomoinal</label>
+                      <input type="text" name="nominal" placeholder="Masukkan Nominal transfer" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Bank Transfer</label>
+                      <select name="bank" class="form-control">
+                        <option disabled selected>-- Bank --</option>
+                        <option value="BRI">BRI</option>
+                        <option value="BNI">BNI</option>
+                        <option value="MANDIRI">MANDIRI</option>
+                        <option value="BCA">BCA</option>
+                        <option value="BSI">BSI</option>
+                        <option value="BTN">BTN</option>
+                        <option value="BTPN">BTPN</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Bukti Transfer</label>
+                      <input type="file" name="bukti" class="form-control">
+                    </div>
+
+
+                    <button type="submit" class="btn btn-success">SIMPAN</button>
+                    <button type="reset" class="btn btn-warning">RESET</button>
+                  </form>
+                </div>
+              </div>
             </div>
-
-            <table class="table table-striped">
-              <tr>
-                <th>BARANG</th>
-                <th>FOTO</th>
-                <th>QTY</th>
-                <th>HARGA</th>
-                <th width="20%">AKSI</th>
-              </tr>
-              <?php
-              $pelanggan = $_SESSION['id_pel'];
-              $subtotal = 0;
-              $result = mysqli_query($conn, "SELECT produk.*,keranjang.*,pelanggan.*,sum(qty)as qty,sum(harga)as total,produk.nama as barang FROM keranjang INNER JOIN produk on produk.id_produk=keranjang.id_produk INNER JOIN pelanggan on pelanggan.id_pel = keranjang.pelanggan WHERE keranjang.pelanggan='$pelanggan' GROUP BY keranjang.id_produk ORDER BY keranjang.id_produk");
-              while ($user_data = mysqli_fetch_array($result)) { ?>
-                <tr>
-                  <td><?php echo $user_data['barang'] ?></td>
-                  <td><img src="../admin/img/produk/<?php echo $user_data['foto1'] ?>" width="80"></td>
-                  <td width="5%" align="center"><?php echo $user_data['qty'] ?></td>
-                  <td align="right" width="10%">Rp <?php echo number_format($user_data['total'], 0, ',', '.') ?></td>
-                  <td width="10%"><a href='../view/ongkir.php?id_keranjang=<?php echo $user_data['id_keranjang'] ?>'><i class="fa fa-marker btn btn-info"> Alamat Pengiriman</i></a></td>
-                </tr>
-              <?php
-                $subtotal += $user_data['total'];
-              } ?>
-              <tr>
-                <input type="hidden" value="<?php echo $subtotal ?>" name="total">
-                <td colspan="4" align="right">
-                  <h3>Sub Total: Rp <?php echo number_format($subtotal, 0, ',', '.') ?></h3>
-                </td>
-                <td><a href='../controller/simpan_transaksi.php?total=<?php echo $subtotal ?>' class="btn btn-success btn-sm">Simpan Transaksi</a></td>
-              </tr>
-            </table>
           </div>
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          <!--<nav aria-label="Contacts Page Navigation">
-            <ul class="pagination justify-content-center m-0">
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-            </ul>
-          </nav> -->
-        </div>
-        <!-- /.card-footer -->
-      </div>
-      <!-- /.card -->
-
+        <!-- /.card -->
     </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+  </div><br>
 
   <?php include "../layout/footer.php" ?>
-  <script>
-    $(function() {
-      var Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000
-      });
-
-      $('.swalDefaultSuccess').click(function() {
-        Toast.fire({
-          icon: 'success',
-          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-        })
-      });
-    });
