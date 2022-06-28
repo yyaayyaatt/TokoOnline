@@ -195,7 +195,6 @@ include('../admin/config/connection.php');
                 <th>FOTO</th>
                 <th>QTY</th>
                 <th>HARGA</th>
-                <th width="20%">AKSI</th>
               </tr>
               <?php if (mysqli_num_rows($result) > 0) {
                 $subtotal = 0;
@@ -204,18 +203,21 @@ include('../admin/config/connection.php');
                   <tr>
                     <td><?php echo $user_data['barang'] ?></td>
                     <td><img src="../admin/img/produk/<?php echo $user_data['foto1'] ?>" width="80"></td>
-                    <td width="5%" align="center"><?php echo $user_data['qty'] ?></td>
+                    <td width="5%" style="text-align: center;"><a href='../controller/delete_keranjang.php?id_keranjang=<?php echo $user_data['id_keranjang'] ?>'><i class="fa fa-minus text-danger"></i></a>
+                      <?php echo $user_data['qty'] ?>
+                      <a href='../controller/add_keranjang.php?id_produk=<?php echo $user_data['id_produk'] ?>'><i class="fa fa-plus text-success"></i></a>
+                    </td>
                     <td align="right" width="10%">Rp <?php echo number_format($user_data['total'], 0, ',', '.') ?></td>
-                    <td width="10%"><a href='../controller/delete_keranjang.php?id_keranjang=<?php echo $user_data['id_keranjang'] ?>'><i class="fa fa-trash text-danger swalDefaultSuccess"> Hapus</i></a></td>
+                    <!-- <td width="10%"><a href='../controller/delete_keranjang.php?id_keranjang=<?php echo $user_data['id_keranjang'] ?>'><i class="fa fa-trash text-danger swalDefaultSuccess"> Hapus</i></a></td> -->
                   </tr>
                 <?php
                   $subtotal += $user_data['total'];
                 } ?>
                 <tr>
-                  <td colspan="4" align="right">
+                  <td colspan="3" align="right">
                     <h3>Sub Total: Rp <?php echo number_format($subtotal, 0, ',', '.') ?></h3>
                   </td>
-                  <td><a href='checkout.php?id_pelanggan=<?php echo $user_data['pelanggan'] ?>' class="btn btn-success btn-sm">Lanjutkan Transaksi</a></td>
+                  <td><a href='checkout.php' class="btn btn-success btn-sm">Lanjutkan Transaksi</a></td>
                 </tr>
               <?php } else { ?>
                 <tr>
