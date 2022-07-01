@@ -67,10 +67,14 @@ include('../admin/config/connection.php');
 
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
               <li><a href="controller/logout.php">Keluar?</a></li>
-            <?php
-            } else { ?>
+              <?php
+            } else if ($_SESSION['role'] == 'admin') { ?>
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
               <li><a href="admin">Admin Panel</a></li>
+              <li><a href="controller/logout.php">Keluar?</a></li>
+           <?php } else if ($_SESSION['role'] == 'super') { ?>
+              <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
+              <li><a href="sadmin">Admin Panel</a></li>
               <li><a href="controller/logout.php">Keluar?</a></li>
           <?php
             }
