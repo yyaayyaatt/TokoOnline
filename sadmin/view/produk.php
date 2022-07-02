@@ -40,6 +40,7 @@
               <th>STOK</th>
               <th>RATING</th>
               <th>FOTO</th>
+              <th>STATUS</th>
               <th width="20%">AKSI</th>
             </tr>
             <?php
@@ -110,6 +111,11 @@
                          ?>
               </td>
               <td><img src="../img/produk/<?php echo $user_data['foto1'] ?>" alt="foto produk" width="50px"></td>
+              <td><?php if ($user_data['status'] == "1") { ?>
+                    <span class="badge badge-success"> Aktif</span>
+                  <?php } else if ($user_data['status'] == "0") { ?>
+                    <span class="badge badge-danger"> Terhapus</span>
+                  <?php } ?></td>
               <td><a href='edit_produk.php?id_produk=<?php echo $user_data['id_produk']?>'><i class="fas fa-edit">Edit</i></a> | <a href='../controller/delete_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>&foto=<?php echo $user_data['foto1'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a></td>
               </tr>
             <?php }
