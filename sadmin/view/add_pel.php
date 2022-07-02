@@ -49,6 +49,14 @@
                     <label>Alamat</label>
                     <input type="text" name="alamat" placeholder="Masukkan Alamat" class="form-control" required>
                   </div>
+                  <div class="form-group">
+                    <label>Hak Akses</label>
+                    <select type="text" name="role" class="form-control" required>
+                      <option value="">--Pilih Hak Akses--</option>
+                      <option value="member">Member</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
 
                   <button type="submit" class="btn btn-success">SIMPAN</button>
                   <button type="reset" class="btn btn-warning">RESET</button>
