@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-lg-12 col-6">
           <div class=" float-sm-right">
-          <a href="add_pel.php" class="btn btn-info"><i class="fas fa-plus"> Tambah Data</i></a><br /><br />
+            <a href="add_pel.php" class="btn btn-info"><i class="fas fa-plus"> Tambah Data</i></a><br /><br />
           </div>
           <table class="table table-striped">
             <tr>
@@ -38,19 +38,49 @@
               <th>EMAIL</th>
               <th>TELP</th>
               <th>ALAMAT</th>
+              <th>AKSES</th>
+              <th>STATUS</th>
               <th width="20%">AKSI</th>
             </tr>
             <?php
-            $x=1;
+            $x = 1;
             $result = mysqli_query($conn, "SELECT * FROM pelanggan ORDER BY id_pel ASC");
-            while ($user_data = mysqli_fetch_array($result)) {?>
+            while ($user_data = mysqli_fetch_array($result)) { ?>
               <tr>
-              <td><?php echo $x++ ?></td>
-              <td><?php echo $user_data['nama'] ?></td>
-              <td><?php echo $user_data['email'] ?></td>
-              <td><?php echo $user_data['telp'] ?></td>
-              <td><?php echo $user_data['alamat'] ?></td>
-              <td><a href='edit_pel.php?id_pel=<?php echo $user_data['id_pel']?>'><i class="fas fa-edit">Edit</i></a> | <a href='../controller/delete_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a></td>
+                <td><?php echo $x++ ?></td>
+                <td><?php echo $user_data['nama'] ?></td>
+                <td><?php echo $user_data['email'] ?></td>
+                <td><?php echo $user_data['telp'] ?></td>
+                <td><?php echo $user_data['alamat'] ?></td>
+                <td><?php if ($user_data['role'] == "member") { ?>
+                    <span class="badge badge-info"> Customer</span>
+                  <?php
+                    } else if ($user_data['role'] == "admin") { ?>
+                    <span class="badge badge-warning"> Admin</span>
+                  <?php
+                    } else if ($user_data['role'] == "super") { ?>
+                    <span class="badge badge-danger"> Super Admin</span>
+                  <?php
+                    } ?>
+                </td>
+                <td><?php if ($user_data['status'] == "1") { ?>
+                    <span class="badge badge-success"> Aktif</span>
+                  <?php } else if ($user_data['status'] == "0") { ?>
+                    <span class="badge badge-danger"> Terhapus</span>
+                  <?php } ?>
+                </td>
+                <td><?php
+                if ($user_data['status'] == "1") { ?>
+                    <a href='edit_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-edit">Edit</i></a>
+                    <?php
+                    if ($user_data['role'] != "super") { ?>
+                      | <a href='../controller/delete_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a>
+                    <?php }
+                    } else if ($user_data['status'] == "0") { ?>
+                    <a href='../controller/restore_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-refresh text text-success">Restore</i></a>
+                  <?php }
+                  ?>
+                </td>
               </tr>
             <?php }
             ?>
