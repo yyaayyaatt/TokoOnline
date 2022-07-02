@@ -65,7 +65,9 @@ $invoice = mysqli_query($conn, "SELECT * FROM transaksi ORDER BY no ASC");
     <!-- <img src="../admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
     <span class="brand-text font-weight-light">Griya Herbal Larieskaa</span>
   </a>
-
+  <div class="brand-link">
+  <span><?php echo $_SESSION['name'] ?></span>
+  </div>
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar Menu -->
