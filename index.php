@@ -52,9 +52,10 @@ include('admin/config/connection.php');
         <p>DAPATKAN PENAWARAN MENARIK KHUSUS HARI INI, BELANJA SEKARANG!</p>
       </div>
       <div class="agile-login" style="text-align: right;">
-        <ul>
+        <ul><li>
           <a href="view/keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-          </a>
+          </a></li>
+<li><a href="view/chat.php">Chat</a></li>
           <?php
           if (!isset($_SESSION['id_pel'])) { ?>
 

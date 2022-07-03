@@ -16,7 +16,7 @@ curl_setopt_array($curl, array(
     CURLOPT_POSTFIELDS => "origin=" . $kota_asal . "&destination=" . $kota_tujuan . "&weight=" . $berat . "&courier=" . $kurir . "",
     CURLOPT_HTTPHEADER => array(
         "content-type: application/x-www-form-urlencoded",
-        "key: c0caca4df9bde60a43d45aeda130b80c"
+        "key: 9240d09aecd264c3966f4013d598c38b"
     ),
 ));
 $response = curl_exec($curl);

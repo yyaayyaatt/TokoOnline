@@ -1,137 +1,88 @@
+<!DOCTYPE html>
+<head>
+  <title>Fitur Ongkos Kirim Menggunakan API RajaOngkir</title>
+  <script src="../admin/plugins/jquery/jquery.min.js"></script>
+</head>
+<body>
 <?php 
+    //Get Data Provinsi
+    $curl = curl_init();
 
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+        "key: 9240d09aecd264c3966f4013d598c38b"
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+?>
+    <label>Provinsi</label><br>
+    <select name='provinsi' id='provinsi'>";
+        <option>Pilih Provinsi</option>
+        <?php
+        $get = json_decode($response, true);
+        for ($i=0; $i < count($get['rajaongkir']['results']); $i++):
+        ?>
+            <option  value="<?php echo $get['rajaongkir']['results'][$i]['province_id']; ?>"  ><?php echo $get['rajaongkir']['results'][$i]['province']; ?></option>
+        <?php endfor; ?>
+    </select><br>
+
+    <label>Kabupaten</label><br>
+    <select id="kabupaten" name="kabupaten" >
+    <!-- Data kabupaten akan diload menggunakan AJAX -->
+    </select> <br>
+
+    <label>Kurir</label><br>
+    <select class="form-control" id="kurir" name="kurir" >
+        <option value="">Pilih Kurir</option>
+        <option value="jne">JNE</option>
+        <option value="tiki">TIKI</option>
+        <option value="pos">POS INDONESIA</option>
+    </select>
+
+    <div id="tampil_ongkir"> </div>
+
+    <script>
+	$('#provinsi').change(function(){
  
+        //Mengambil value dari option select provinsi kemudian parameternya dikirim menggunakan ajax
+        var prov = $('#provinsi').val();
+        var nama_provinsi = $(this).attr("nama_provinsi");
+        $.ajax({
+            type : 'GET',
+            url : 'view/ambil-kabupaten.php',
+            data :  'prov_id=' + prov,
+                success: function (data) {
+                //jika data berhasil didapatkan, tampilkan ke dalam option select kabupaten
+                $("#kabupaten").html(data);
+            }
+        });
+    });
 
- //Get Data Kabupaten 
-  $curl = curl_init();  
-  curl_setopt_array($curl, array( 
-    CURLOPT_URL => "http://api.rajaongkir.com/starter/city", 
-    CURLOPT_RETURNTRANSFER => true, 
-    CURLOPT_ENCODING => "", 
-    CURLOPT_MAXREDIRS => 10, 
-    CURLOPT_TIMEOUT => 30, 
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, 
-    CURLOPT_CUSTOMREQUEST => "GET", 
-    CURLOPT_HTTPHEADER => array( 
-      "Key: Anda bisa isi dengan api key milik Anda sendiri" 
-    ), 
-  )); 
+    $('#kurir').change(function(){
 
-  $response = curl_exec($curl); 
-  $err = curl_error($curl); 
-
-  curl_close($curl); 
-
-  echo "<label>Kota Asal</label><br>"; 
-  echo "<select name='asal' id='asal'>"; 
-  echo "<option>Pilih Kota Asal</option>"; 
-  $data = json_decode($response, true); 
-  for ($i=0; $i < count($data['rajaongkir']['results']); $i++) {  
-      echo "<option value='".$data['rajaongkir']['results'][$i]['city_id']."'>".$data['rajaongkir']['results'][$i]['city_name']."</option>"; 
-  } 
-  echo "</select><br><br><br>"; 
-  //Get Data Kabupaten 
-
-
-  //----------------------------------------------------------------------------- 
-
-  //Get Data Provinsi 
-  $curl = curl_init(); 
-
-  curl_setopt_array($curl, array( 
-    CURLOPT_URL => "http://api.rajaongkir.com/starter/province", 
-    CURLOPT_RETURNTRANSFER => true, 
-    CURLOPT_ENCODING => "", 
-    CURLOPT_MAXREDIRS => 10, 
-    CURLOPT_TIMEOUT => 30, 
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, 
-    CURLOPT_CUSTOMREQUEST => "GET", 
-    CURLOPT_HTTPHEADER => array( 
-      "Key: c0caca4df9bde60a43d45aeda130b80c" 
-    ), 
-  )); 
-
-  $response = curl_exec($curl); 
-  $err = curl_error($curl); 
-
-  echo "Provinsi Tujuan<br>"; 
-  echo "<select name='provinsi' id='provinsi'>"; 
-  echo "<option>Pilih Provinsi Tujuan</option>"; 
-  $data = json_decode($response, true); 
-  for ($i=0; $i < count($data['rajaongkir']['results']); $i++) { 
-  echo "<option value='".$data['rajaongkir']['results'][$i]['province_id']."'>".$data['rajaongkir']['results'][$i]['province']."</option>"; 
-  } 
-  echo "</select><br><br>"; 
-  //Get Data Provinsi 
-
- ?> 
-
- <!DOCTYPE html> 
- <html> 
-  <head> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
-  </head> 
- 
-  <body> 
-
-  <label>Kabupaten Tujuan</label><br> 
-  <select id="kabupaten" name="kabupaten"></select><br><br> 
-
-  <label>Kurir</label><br> 
-  <select id="kurir" name="kurir"> 
-  <option value="jne">JNE</option> 
-  <option value="tiki">TIKI</option> 
-  </select><br><br> 
-
-  <label>Berat (gram)</label><br> 
-  <input id="berat" type="text" name="berat" value="500" /> 
-  <br><br> 
-
-  <input id="cek" type="submit" value="Cek"/> 
-
-  <div id="ongkir"></div> 
-
-  </body> 
- </html> 
-
-
- <script type="text/javascript"> 
-
-  $(document).ready(function(){ 
-  $('#provinsi').change(function(){ 
-
-  //Pada tahap ini value diambil dari option select provinsi kemudian parameternya dikirimkan dengan memakai ajax  
-  var prov = $('#provinsi').val(); 
-
-          $.ajax({ 
-                type : 'GET', 
-               url : 'http://domainAnda.tld/rajaongkir/cek_kabupaten.php', 
-                data :  'prov_id=' + prov, 
-  success: function (data) { 
-
-  //jika data berhasil didapatkan, tampilkan ke dalam option select kabupaten 
-  $("#kabupaten").html(data); 
-  } 
-              }); 
-  }); 
-
-  $("#cek").click(function(){ 
-  //Pada tahap ini value diambil dari option select provinsi asal, kabupaten, kurir, berat kemudian parameternya juga akan dikirimkan pakai ajax  
-  var asal = $('#asal').val(); 
-  var kab = $('#kabupaten').val(); 
-  var kurir = $('#kurir').val(); 
-  var berat = $('#berat').val(); 
-
-          $.ajax({ 
-                type : 'POST', 
-               url : 'http://domainAnda.tld/rajaongkir/cek_ongkir.php', 
-                data :  {'kab_id' : kab, 'kurir' : kurir, 'asal' : asal, 'berat' : berat}, 
-  success: function (data) { 
-
-  //jika data sudah berhasil didapat, akan ditampilkan ke dalam element div ongkir 
-  $("#ongkir").text(data); 
-  } 
-              }); 
-  }); 
-  }); 
- </script>
+        //Mengambil value dari option select provinsi asal, kabupaten, kurir kemudian parameternya dikirim menggunakan ajax
+        var kab = $('#kabupaten').val();
+        var kurir = $('#kurir').val();
+   
+        $.ajax({
+            type : 'POST',
+            url : 'tabel-ongkir.php',
+            data :  {'kab_id' : kab, 'kurir' : kurir},
+                success: function (data) {
+                //jika data berhasil didapatkan, tampilkan ke dalam element div tampil_ongkir
+                $("#tampil_ongkir").html(data);
+            }
+        });
+    });
+    </script>
+</body>
+</html>
