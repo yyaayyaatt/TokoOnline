@@ -61,6 +61,12 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
+              <a href="./rating.php" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Daftar Rating</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="./transaksi.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Transaksi Pemesanan</p>
