@@ -53,10 +53,8 @@ include('../admin/config/connection.php');
             </div>
             <div class="agile-login">
                 <ul>
-                    <li>
-          <a href="keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-          </a></li>
-          <li><a href="view/chat.php">Chat</a></li>
+                    <a href="keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                    </a>
                     <?php
                     if (!isset($_SESSION['id_pel'])) { ?>
 
@@ -231,11 +229,11 @@ include('../admin/config/connection.php');
         <input type="reset" name="reset" value="Clear" class="btn btn-danger"></input>
         <?php
         if (isset($_POST['submit'])) {
-            $nama    = $_POST['nama'];
             $id_pel    = $_SESSION['id_pel'];
             $pesan    = $_POST['pesan'];
             $tanggal    = date("Y-m-d, H:i a");
             $status    = $_POST['cek'];
+            $id_tujuan    = $_POST['id_tujuan'];
             if ($_POST['nama'] == 'Admin') { //validasi kata admin
         ?>
                 <script language="JavaScript">
@@ -244,11 +242,11 @@ include('../admin/config/connection.php');
                 </script>
             <?php
             }
-            if (empty($_POST['nama']) || empty($_POST['pesan']) || empty($_SESSION['id_pel'])) { //validasi data
+            if (empty($pesan) || empty($id_pel)) { //validasi data
             ?>
                 <script language="JavaScript">
                     alert('Data yang Anda masukan tidak lengkap !');
-                    document.location = '../index.php';
+                    document.location = '../view/chat.php';
                 </script>
             <?php
             }
@@ -256,12 +254,12 @@ include('../admin/config/connection.php');
             ?>
                 <script language="JavaScript">
                     alert('Please Checklist - Confirm you are NOT a spammer !');
-                    document.location = '../index.php';
+                    document.location = '../view/chat.php';
                 </script>
                 <?php
             } else {
-                $input_chat = "INSERT INTO chat (id_pelanggan, pesan, tanggal, status,id_pengirim) 
-                VALUES ('$id_pel', '$pesan', '$tanggal', '$status','')";
+                $input_chat = "INSERT INTO chat (id_pelanggan, pesan, tanggal, status,id_tujuan) 
+                VALUES ('$id_pel', '$pesan', '$tanggal', '$status','$id_tujuan')";
                 $query_input = mysqli_query($conn, $input_chat);
                 if ($query_input) {
                 ?>
