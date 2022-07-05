@@ -1,2 +1,4 @@
 
 .htaccess
+admin/config/connection.php
+sadmin/config/connection.php
