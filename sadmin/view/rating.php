@@ -54,7 +54,7 @@
                 settype($rate, "integer");
                 // var_dump($rate);
                 if ($rate == 5) {
-                ?><h4><span class="fa fa-star checked-1"></span>
+                ?><span class="fa fa-star checked-1"></span>
                     <span class="fa fa-star checked-2"></span>
                     <span class="fa fa-star checked-3"></span>
                     <span class="fa fa-star checked-4"></span>
