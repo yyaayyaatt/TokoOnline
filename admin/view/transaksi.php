@@ -71,7 +71,7 @@ $tglahir = $_GET['tglahir'];
                   <th width="20%">AKSI</th>
                 </tr>
                 <?php
-                $result = mysqli_query($conn, "SELECT * FROM transaksi INNER JOIN pelanggan on pelanggan.id_pel=transaksi.pelanggan WHERE transaksi.tanggal BETWEEN '$tglawal' AND '$tglahir' ORDER BY no ASC");
+                $result = mysqli_query($conn, "SELECT transaksi.*,pelanggan.nama FROM transaksi INNER JOIN pelanggan on pelanggan.id_pel=transaksi.pelanggan WHERE transaksi.tanggal BETWEEN '$tglawal' AND '$tglahir' ORDER BY no ASC");
 
                 while ($user_data = mysqli_fetch_array($result)) { ?>
                   <tr>
