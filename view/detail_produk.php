@@ -75,7 +75,7 @@ include('../admin/config/connection.php');
               <li><a href="../controller/logout.php">Keluar?</a></li>
            <?php } else if ($_SESSION['role'] == 'super') { ?>
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="../sadmin">Admin Panel</a></li>
+              <li><a href="../sadmin">Super Admin Panel</a></li>
               <li><a href="../controller/logout.php">Keluar?</a></li>
           <?php
             }
@@ -221,7 +221,7 @@ include('../admin/config/connection.php');
                 settype($rate, "integer");
                 // var_dump($rate);
                 if ($rate == 5) {
-                ?><h4><span class="fa fa-star checked-1"></span>
+                ?><span class="fa fa-star checked-1"></span>
                     <span class="fa fa-star checked-2"></span>
                     <span class="fa fa-star checked-3"></span>
                     <span class="fa fa-star checked-4"></span>
