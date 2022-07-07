@@ -198,7 +198,7 @@ include('admin/config/connection.php');
         <h3 align="center">Produk Kami</h3><br>
         <div class="row" align="center">
           <?php
-          $result = mysqli_query($conn, "SELECT * FROM produk INNER JOIN kategori on kategori.id_kat=produk.kategori ORDER BY id_produk ASC limit 16");
+          $result = mysqli_query($conn, "SELECT * FROM produk INNER JOIN kategori on kategori.id_kat=produk.kategori where status='1' ORDER BY id_produk ASC limit 16");
           while ($user_data = mysqli_fetch_array($result)) { ?>
 
             <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch flex-column">
