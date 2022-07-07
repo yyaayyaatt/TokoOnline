@@ -76,7 +76,7 @@ include('../admin/config/connection.php');
               <li><a href="../controller/logout.php">Keluar?</a></li>
            <?php } else if ($_SESSION['role'] == 'super') { ?>
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="../sadmin">Admin Panel</a></li>
+              <li><a href="../sadmin">Super Admin Panel</a></li>
               <li><a href="../controller/logout.php">Keluar?</a></li>
           <?php
             }
@@ -207,9 +207,8 @@ $pelanggan = $_SESSION['id_pel']; ?>
             $subtotal = 0;
             $result = mysqli_query(
               $conn,
-              "SELECT produk.*,transaksi.*,transaksi_detail.*,pelanggan.*,transaksi_detail.qty,transaksi_detail.harga,transaksi_detail.nama as barang 
+              "SELECT transaksi.*,transaksi_detail.*,pelanggan.nama,transaksi_detail.qty,transaksi_detail.harga,transaksi_detail.nama as barang 
           FROM transaksi_detail 
-          INNER JOIN produk on produk.id_produk=transaksi_detail.id_produk 
           INNER JOIN transaksi on transaksi.invoice=transaksi_detail.invoice 
           INNER JOIN pelanggan on pelanggan.id_pel = transaksi.pelanggan 
           WHERE transaksi.pelanggan='$pelanggan'  
