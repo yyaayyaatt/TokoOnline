@@ -77,7 +77,7 @@
                       | <a href='../controller/delete_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a>
                     <?php }
                     } else if ($user_data['status'] == "0") { ?>
-                    <a href='../controller/restore_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-refresh text text-success">Restore</i></a>
+                    <a href='../controller/restore_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fa fa-refresh text text-success">Restore</i></a>
                   <?php }
                   ?>
                 </td>
