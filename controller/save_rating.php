@@ -15,7 +15,7 @@ $query = mysqli_query($conn, $cek);
 // var_dump(isset($query));
 if (!isset($query)) {
     //query insert data ke dalam database
-    $query2 = "INSERT INTO rating (pelanngan,rate,produk,pesan) 
+    $query2 = "INSERT INTO rating (pelanggan,rate,produk,pesan) 
 VALUES ('$customer','$rate','$id_produk','$pesan')";
     mysqli_query($conn, $query2);
 } else {
