@@ -2,94 +2,85 @@
 session_start();
 
 if (!isset($_SESSION['id_pel'])) {
-  header('location:view/login.php');
-};
+    header('location:view/login.php');
+} else if ($_SESSION['role'] == 'admin') {
+    header('location:../admin/index.php');
+} else if ($_SESSION['role'] == 'super') {
+    header('location:../sadmin/index.php');
+}
 
 include('../admin/config/connection.php');
 
 ?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Griya Herbal Larieskaa</title>
-  <link rel="shorcut icon" type="=image/png" href="icon/logo.png" />
-  <!-- for-mobile-apps -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="keywords" content="Falenda Flora, Ruben Agung Santoso" />
-  <script type="application/x-javascript">
-    addEventListener("load", function() {
-      setTimeout(hideURLbar, 0);
-    }, false);
+    <title>Griya Herbal Larieskaa</title>
+    <link rel="shorcut icon" type="=image/png" href="icon/logo.png" />
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Falenda Flora, Ruben Agung Santoso" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-    function hideURLbar() {
-      window.scrollTo(0, 1);
-    }
-  </script>
-  <!-- //for-mobile-apps -->
-  <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
-  <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //for-mobile-apps -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 
-  <!-- <link rel="stylesheet" href="../admin/dist/css/adminlte.min.css"> -->
-  <!-- font-awesome icons -->
-  <link href="../css/font-awesome.min.css" rel="stylesheet">
-  <link href="../css/skdslider.css" rel="stylesheet">
-  <!-- //font-awesome icons -->
-  <!-- //js -->
-  <!-- <link href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <!-- font-awesome icons -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/skdslider.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <!-- //js -->
+    <!-- <link href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'> -->
-  <!-- start-smoth-scrolling -->
-  <!-- start-smoth-scrolling -->
+    <!-- start-smoth-scrolling -->
+    <!-- start-smoth-scrolling -->
 </head>
 
 <body>
-  <!-- header -->
-  <div class="agileits_header">
-    <div class="container">
-      <div class="w3l_offers">
-        <p>DAPATKAN PENAWARAN MENARIK KHUSUS HARI INI, BELANJA SEKARANG!</p>
-      </div>
-      <div class="agile-login">
-        <ul>
-          <li>
-            <a href="keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-            </a>
-          </li>
-          <li><a href="chat.php">Chat</a></li>
-          <?php
-          if (!isset($_SESSION['id_pel'])) { ?>
 
-            <li><a href="../register.php"> Daftar</a></li>
-            <li><a href="../login.php">Masuk</a></li>
+    <!-- header -->
+    <div class="agileits_header">
+        <div class="container">
+            <div class="w3l_offers">
+                <p>DAPATKAN PENAWARAN MENARIK KHUSUS HARI INI, BELANJA SEKARANG!</p>
+            </div>
+            <div class="agile-login">
+                <ul>
+                    <a href="keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                    </a>
+                    <?php
+                    if (!isset($_SESSION['id_pel'])) { ?>
 
-            <?php } else {
+                        <li><a href="register.php"> Daftar</a></li>
+                        <li><a href="view/login.php">Masuk</a></li>
 
-            if ($_SESSION['role'] == 'member') { ?>
+                        <?php } else {
 
-              <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="../controller/logout.php">Keluar?</a></li>
-              <?php
-            } else if ($_SESSION['role'] == 'admin') { ?>
-              <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="../admin">Admin Panel</a></li>
-              <li><a href="../controller/logout.php">Keluar?</a></li>
-           <?php } else if ($_SESSION['role'] == 'super') { ?>
-              <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="../sadmin">Super Admin Panel</a></li>
-              <li><a href="../controller/logout.php">Keluar?</a></li>
-          <?php
-            }
-          }
-          ?>
+                        if ($_SESSION['role'] == 'member') { ?>
 
-        </ul>
-      </div>
-      <div class="clearfix"> </div>
+                            <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
+                            <li><a href="../controller/logout.php">Keluar?</a></li>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
     </div>
-  </div>
-
   <div class="logo_products">
     <div class="container">
       <div class="w3ls_logo_products_left1">
@@ -198,7 +189,7 @@ include('../admin/config/connection.php');
         <div class="card-body pb-0">
           <div class="row">
             <?php
-            $result = mysqli_query($conn, "SELECT * FROM produk INNER JOIN kategori on kategori.id_kat=produk.kategori where produk.kategori like '%$kat%' ORDER BY id_produk ASC limit 20");
+            $result = mysqli_query($conn, "SELECT * FROM produk INNER JOIN kategori on kategori.id_kat=produk.kategori where produk.kategori like '%$kat%' and status='1' ORDER BY id_produk ASC limit 20");
             while ($user_data = mysqli_fetch_array($result)) { ?>
 
               <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch flex-column">
