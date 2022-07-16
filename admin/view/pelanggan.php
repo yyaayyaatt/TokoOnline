@@ -50,7 +50,10 @@
               <td><?php echo $user_data['email'] ?></td>
               <td><?php echo $user_data['telp'] ?></td>
               <td><?php echo $user_data['alamat'] ?></td>
-              <td><a href='edit_pel.php?id_pel=<?php echo $user_data['id_pel']?>'><i class="fas fa-edit">Edit</i></a> | <a href='../controller/delete_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a></td>
+              <td>
+                <a href='edit_pel.php?id_pel=<?php echo $user_data['id_pel']?>'><i class="fas fa-edit">Edit</i></a>
+                | <a href='../controller/delete_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a>
+                | <a href='../view/chat.php?id_pelanggan=<?php echo $user_data['id_pel'] ?>&nama=<?php echo $user_data['nama'] ?>'><i class="fas fa-chat text text-success">Chat</i></a></td>
               </tr>
             <?php }
             ?>
