@@ -3,7 +3,11 @@ session_start();
 
 if (!isset($_SESSION['id_pel'])) {
     header('location:view/login.php');
-};
+} else if ($_SESSION['role'] == 'admin') {
+    header('location:../admin/index.php');
+} else if ($_SESSION['role'] == 'super') {
+    header('location:../sadmin/index.php');
+}
 
 include('../admin/config/connection.php');
 
@@ -66,15 +70,6 @@ include('../admin/config/connection.php');
                         if ($_SESSION['role'] == 'member') { ?>
 
                             <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-                            <li><a href="controller/logout.php">Keluar?</a></li>
-                        <?php
-                        } else if ($_SESSION['role'] == 'admin') { ?>
-                            <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-                            <li><a href="../admin">Admin Panel</a></li>
-                            <li><a href="../controller/logout.php">Keluar?</a></li>
-                        <?php } else if ($_SESSION['role'] == 'super') { ?>
-                            <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-                            <li><a href="../sadmin">Super Admin Panel</a></li>
                             <li><a href="../controller/logout.php">Keluar?</a></li>
                     <?php
                         }
@@ -162,7 +157,76 @@ include('../admin/config/connection.php');
     </div>
     </nav>
 
-    <div style="overflow:auto; width:30%; height:320px; margin-left:35%;margin-right:35%;">
+    <div class="container">
+        <form method="POST" name="chat" action="#" enctype="application/x-www-form-urlencoded">
+            <br>
+            <h4>Obrolan</h4> <br>
+            <p>Admin Tujuan</p>
+            <select class="form-control" name="id_tujuan" style="width: 95%;" required>
+                <option value="none">-- Pilih admin --</option>
+                <?php
+                $admin = "SELECT * FROM pelanggan where role='admin'";
+                $query = mysqli_query($conn, $admin);
+                while ($hasil = mysqli_fetch_array($query)) { ?>
+                    <option value="<?php echo $hasil['id_pel'] ?>"><?php echo $hasil['nama'] ?></option>
+            </select>
+        <?php } ?><br><br>
+        <p>Pesan Obrolan</p>
+        <textarea class="form-control" placeholder=" Obrolan Anda" name="pesan" rows="2" cols="40" maxlength="120" style="width: 95%;" required></textarea><br><br>
+        <input type="submit" name="submit" value="Kirim Pesan" class="btn btn-success"></input>
+        <input type="reset" name="reset" value="Bersihkan" class="btn btn-danger"></input>
+        <br><br><?php
+                if (isset($_POST['submit'])) {
+                    $id_pel    = $_SESSION['id_pel'];
+                    $pesan    = $_POST['pesan'];
+                    $tanggal    = date("Y-m-d, H:i a");
+                    $status    = $_POST['cek'];
+                    $id_tujuan    = $_POST['id_tujuan'];
+                    if ($_POST['nama'] == 'Admin') { //validasi kata admin
+                ?>
+                <script language="JavaScript">
+                    alert('Anda bukan Admin !');
+                    document.location = 'index.php';
+                </script>
+            <?php
+                    }
+                    if (empty($pesan) || empty($id_pel)) { //validasi data
+            ?>
+                <script language="JavaScript">
+                    alert('Data yang Anda masukan tidak lengkap !');
+                    document.location = '../view/chat.php';
+                </script>
+            <?php
+                    }
+                    // if (empty($_POST['cek'])) { //validasi data
+                    // 
+            ?>
+            // <script language="JavaScript">
+                //         alert('Please Checklist - Confirm you are NOT a spammer !');
+                //         document.location = '../view/chat.php';
+                //     
+            </script>
+            // <?php
+                    // } else {
+                    $input_chat = "INSERT INTO chat (id_pelanggan, pesan, tanggal, status,id_tujuan) 
+                VALUES ('$id_pel', '$pesan', '$tanggal', '$status','$id_tujuan')";
+                    $query_input = mysqli_query($conn, $input_chat);
+                    if ($query_input) {
+                ?>
+                <script language="JavaScript">
+                    document.location = '../index.php';
+                </script>
+        <?php
+                    } else {
+                        echo 'Dbase E';
+                    }
+                    // }
+                }
+        ?>
+        </form>
+    </div>
+    <div class="container"><br>
+        <h4>Daftar Obrolan</h4><br>
         <table class="art-article" border="0" cellspacing="0" cellpadding="0" style=" margin: 0; width: 100%;">
             <tbody>
                 <?php
@@ -208,73 +272,7 @@ include('../admin/config/connection.php');
                 ?>
             </tbody>
         </table>
-    </div>
-    <div style="width:30%; height:320px; margin-left:35%;margin-right:35%;">
-        <form method="POST" name="chat" action="#" enctype="application/x-www-form-urlencoded">
-            <p>Chat</p><br>
-            <p>Admin Tujuan</p>
-            <select class="form-control" name="id_tujuan" style="width: 95%;" required>
-                <option value="none">-- Pilih admin --</option>
-                <?php
-                $admin = "SELECT * FROM pelanggan where role='admin'";
-                $query = mysqli_query($conn, $admin);
-                while ($hasil = mysqli_fetch_array($query)) { ?>
-                    <option value="<?php echo $hasil['id_pel'] ?>"><?php echo $hasil['nama'] ?></option>
-            </select>
-        <?php } ?><br><br>
-        <p>Chat</p>
-        <textarea class="form-control" placeholder=" Obrolan Anda" name="pesan" rows="2" cols="40" maxlength="120" style="width: 95%;" required></textarea><br><br>
-        <input type="checkbox" name="cek" value="cek" class="art-button"> Confirm you are NOT a spammer</input><br><br>
-        <input type="submit" name="submit" value="Send" class="btn btn-success"></input> 
-        <input type="reset" name="reset" value="Clear" class="btn btn-danger"></input>
-        <?php
-        if (isset($_POST['submit'])) {
-            $id_pel    = $_SESSION['id_pel'];
-            $pesan    = $_POST['pesan'];
-            $tanggal    = date("Y-m-d, H:i a");
-            $status    = $_POST['cek'];
-            $id_tujuan    = $_POST['id_tujuan'];
-            if ($_POST['nama'] == 'Admin') { //validasi kata admin
-        ?>
-                <script language="JavaScript">
-                    alert('Anda bukan Admin !');
-                    document.location = 'index.php';
-                </script>
-            <?php
-            }
-            if (empty($pesan) || empty($id_pel)) { //validasi data
-            ?>
-                <script language="JavaScript">
-                    alert('Data yang Anda masukan tidak lengkap !');
-                    document.location = '../view/chat.php';
-                </script>
-            <?php
-            }
-            if (empty($_POST['cek'])) { //validasi data
-            ?>
-                <script language="JavaScript">
-                    alert('Please Checklist - Confirm you are NOT a spammer !');
-                    document.location = '../view/chat.php';
-                </script>
-                <?php
-            } else {
-                $input_chat = "INSERT INTO chat (id_pelanggan, pesan, tanggal, status,id_tujuan) 
-                VALUES ('$id_pel', '$pesan', '$tanggal', '$status','$id_tujuan')";
-                $query_input = mysqli_query($conn, $input_chat);
-                if ($query_input) {
-                ?>
-                    <script language="JavaScript">
-                        document.location = '../index.php';
-                    </script>
-        <?php
-                } else {
-                    echo 'Dbase E';
-                }
-            }
-        }
-        ?>
-        </form>
-    </div>
+    </div><br>
     <script src="js/skdslider.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/move-top.js"></script>
