@@ -7,7 +7,7 @@ include('../admin/config/connection.php');
 $user     = $_POST['user'];
 $password     = md5($_POST['password']);
 //query insert data ke dalam database
-$query = mysqli_query($conn, "SELECT * FROM pelanggan where user='$user' and password='$password' limit 1");
+$query = mysqli_query($conn, "SELECT * FROM pelanggan where user='$user' and password='$password' and status='1' limit 1");
 
 $row = mysqli_fetch_assoc($query);
 
