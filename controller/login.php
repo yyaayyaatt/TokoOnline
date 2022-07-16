@@ -14,14 +14,34 @@ $row = mysqli_fetch_assoc($query);
 //kondisi pengecekan apakah data berhasil dimasukkan atau tidak
 // var_dump($row['nama']);
 if($row != NULL) {
-    $_SESSION['id_pel'] = $row['id_pel'];
-    $_SESSION['name'] = $row['nama'];
-    $_SESSION['addrs'] = $row['alamat'];
-    $_SESSION['email'] = $row['email'];
-    $_SESSION['phone'] = $row['telp'];
-    $_SESSION['role'] = $row['role'];
-    $_SESSION['log'] = "Logged";
-    header("location: ../index.php");
+    if($row['role']=='super'){
+        $_SESSION['id_pel'] = $row['id_pel'];
+        $_SESSION['name'] = $row['nama'];
+        $_SESSION['addrs'] = $row['alamat'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['phone'] = $row['telp'];
+        $_SESSION['role'] = $row['role'];
+        $_SESSION['log'] = "Logged";
+    header("location: ../sadmin/index.php");
+    }else if($row['role']=='admin'){
+        $_SESSION['id_pel'] = $row['id_pel'];
+        $_SESSION['name'] = $row['nama'];
+        $_SESSION['addrs'] = $row['alamat'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['phone'] = $row['telp'];
+        $_SESSION['role'] = $row['role'];
+        $_SESSION['log'] = "Logged";
+        header("location: ../admin/index.php"); 
+    }else if($row['role']=='member'){
+        $_SESSION['id_pel'] = $row['id_pel'];
+        $_SESSION['name'] = $row['nama'];
+        $_SESSION['addrs'] = $row['alamat'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['phone'] = $row['telp'];
+        $_SESSION['role'] = $row['role'];
+        $_SESSION['log'] = "Logged";
+        header("location: ../index.php"); 
+    }
 } else {
 
     //pesan error gagal insert data
