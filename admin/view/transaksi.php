@@ -66,14 +66,15 @@ if (isset($_GET['tglawal']) && isset($_GET['tglahir'])) {
                   <th>TANGGAL</th>
                   <th>INVOICE</th>
                   <th>PELANGGAN</th>
-                  <th>TOTAL</th>
+                  <th>ONGKIR</th>
                   <th>RESI</th>
                   <th>JASA</th>
+                  <th>TOTAL</th>
                   <th>STATUS</th>
                   <th width="20%">AKSI</th>
                 </tr>
                 <?php
-                $result = mysqli_query($conn, "SELECT transaksi.*,pelanggan.nama FROM transaksi INNER JOIN pelanggan on pelanggan.id_pel=transaksi.pelanggan WHERE transaksi.tanggal BETWEEN '$tglawal' AND '$tglahir' ORDER BY no ASC");
+                $result = mysqli_query($conn, "SELECT transaksi.*,(transaksi.total+transaksi.ongkir) as sub ,pelanggan.nama FROM transaksi INNER JOIN pelanggan on pelanggan.id_pel=transaksi.pelanggan WHERE transaksi.tanggal BETWEEN '$tglawal' AND '$tglahir' ORDER BY no ASC");
 
                 while ($user_data = mysqli_fetch_array($result)) { ?>
                   <tr>
@@ -81,9 +82,10 @@ if (isset($_GET['tglawal']) && isset($_GET['tglahir'])) {
                     <td><?php echo $user_data['tanggal'] ?></td>
                     <td><?php echo $user_data['invoice'] ?></td>
                     <td><?php echo $user_data['nama'] ?></td>
-                    <td><?php echo $user_data['total'] ?></td>
+                    <td><?php echo $user_data['ongkir'] ?></td>
                     <td><?php echo $user_data['resi'] ?></td>
                     <td><?php echo $user_data['eks'] ?></td>
+                    <td><?php echo $user_data['sub'] ?></td>
                     <td><?php if ($user_data['status'] == "Menunggu Pembayaran") { ?>
                         <span class="badge badge-warning"> <?php echo $user_data['status'] ?></span>
                       <?php } else if ($user_data['status'] == "Menunggu Konfirmasi") {  ?>
