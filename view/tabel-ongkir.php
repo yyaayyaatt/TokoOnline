@@ -55,8 +55,8 @@
 					 <td align="right"><?php echo number_format($data['rajaongkir']['results'][$k]['costs'][$l]['cost'][0]['value']);?></td>
 					 <td>
 					
-						 <div class="radio">
-  							<label><input type="radio" tarif="<?php echo $data['rajaongkir']['results'][$k]['costs'][$l]['cost'][0]['value']; ?>"   name="pilih_ongkir" class="pilih_ongkir" ></label>
+						 <div>
+  							<label><input type="radio" tarif="<?php echo $data['rajaongkir']['results'][$k]['costs'][$l]['cost'][0]['value']; ?>" jns="<?php echo $data['rajaongkir']['results'][$k]['costs'][$l]['service'];?>"  name="pilih_ongkir" class="pilih_ongkir" ></label>
 						</div>
 					</td>
 				 </tr>
@@ -69,14 +69,22 @@
 	}
 	?>
 
-    <span id="ongkir"> </span>
+	<form action="simpan_alamat.php" method="POST">
+	<input type="hidden" id="invoice" name="invoice" value="<?php echo $_POST['invoice'] ?>">
+	<input type="hidden" id="eks" name="eks" value="<?php echo $kurir ?>">
+	<input type="hidden" id="jns" name="jns">
+    	<input type="hidden" id="ongkir" name="ongkir">
+		<br><br><input type="submit" class="btn btn-success" value="Simpan">
+	</form>
 
 <script type="text/javascript">
 	$('.pilih_ongkir').on('click',function(){
-
+		
+		var jns = $(this).attr("jns");
 		var tarif = parseInt($(this).attr("tarif"));
 
-		$('#ongkir').text('Rp. '+format_rupiah(tarif));
+		$('#jns').val(jns);
+		$('#ongkir').val(tarif);
 	
 	});
 
