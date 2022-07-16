@@ -116,7 +116,20 @@
                   <?php } else if ($user_data['status'] == "0") { ?>
                     <span class="badge badge-danger"> Terhapus</span>
                   <?php } ?></td>
-              <td><a href='edit_produk.php?id_produk=<?php echo $user_data['id_produk']?>'><i class="fas fa-edit">Edit</i></a> | <a href='../controller/delete_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>&foto=<?php echo $user_data['foto1'] ?>'><i class="fas fa-trash text text-danger">Delete</i></a></td>
+
+                <td><?php
+                if ($user_data['status'] == "1") { ?>
+                    <a href='edit_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-edit"> Edit</i></a>
+                    <?php
+                    if ($_SESSION['role'] == "super") { ?>
+                      | <a href='../controller/delete_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>&foto=<?php echo $user_data['foto1'] ?>'><i class="fas fa-trash text text-danger"> Delete</i></a>
+                    <?php }
+                    } else if ($user_data['status'] == "0") {
+                      if ($_SESSION['role'] == "super") { ?>
+                    <a href='../controller/restore_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>&foto=<?php echo $user_data['foto1'] ?>'><i class="fas fa-refresh text text-success"> Restore</i></a>
+                  <?php }}
+                  ?>
+                </td>
               </tr>
             <?php }
             ?>
