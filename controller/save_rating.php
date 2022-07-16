@@ -11,14 +11,15 @@ $pesan     = $_POST['pesan'];
 $invoice     = $_POST['invoice'];
 $customer     = $_SESSION['id_pel'];
 
-$cek = "Select COUNT(id_rate) from rating where invoice = '$invoice'";
+$cek = "Select invoice from rating where invoice = '$invoice'";
 $query = mysqli_query($conn, $cek);
-// var_dump(isset($query));
-if (!isset($query)) {
+$data = mysqli_fetch_row($query);
+if ($data==null) {
     //query insert data ke dalam database
-    $query2 = "INSERT INTO rating (pelanggan,rate,produk,pesan,invoice) 
-VALUES ('$customer','$rate','$id_produk','$pesan','$invoice')";
+    $query2 = "INSERT INTO rating (invoice,pelanggan,rate,produk,pesan) 
+VALUES ('$invoice','$customer','$rate','$id_produk','$pesan')";
     mysqli_query($conn, $query2);
+    header("location: ../view/transaksi.php");
 } else {
     $query1 = "UPDATE rating SET rate = '$rate', pesan = '$pesan' 
         WHERE invoice = '$invoice'";
