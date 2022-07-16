@@ -223,6 +223,7 @@ include('../admin/config/connection.php');
                   </div>
                 <div class="form-group form-control">
                     <input type="hidden" name="id_produk" value="<?php echo $_GET['id_produk'] ?>">
+                    <input type="hidden" name="invoice" value="<?php echo $_GET['invoice'] ?>">
                     <input type="text" name="pesan" placeholder="Tulis komentar disini" class="form-control">
                   </div>
 
