@@ -197,7 +197,7 @@ include('../admin/config/connection.php');
         <div class="row">
           <?php
           $result = mysqli_query($conn, "SELECT * FROM produk INNER JOIN kategori on kategori.id_kat=produk.kategori 
-          where produk.nama like '%$Search%' or kategori.nm_kat like '%$Search%' ORDER BY id_produk ASC limit 20");
+          where produk.nama like '%$Search%' and status='1' or kategori.nm_kat like '%$Search%' and status='1' ORDER BY id_produk ASC limit 20");
           while ($user_data = mysqli_fetch_array($result)) { ?>
 
             <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch flex-column">
