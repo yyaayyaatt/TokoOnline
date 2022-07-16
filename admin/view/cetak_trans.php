@@ -51,11 +51,14 @@ $tglahir = $_GET['tglahir'];
                   <th>TANGGAL</th>
                   <th>INVOICE</th>
                   <th>PELANGGAN</th>
+                  <th>ONGKIR</th>
+                  <th>RESI</th>
+                  <th>JASA</th>
                   <th>STATUS</th>
                   <th>TOTAL</th>
                 </tr>
                 <?php
-                $result = mysqli_query($conn, "SELECT * FROM transaksi INNER JOIN pelanggan on pelanggan.id_pel=transaksi.pelanggan WHERE transaksi.tanggal BETWEEN '$tglawal' AND '$tglahir' ORDER BY no ASC");
+                $result = mysqli_query($conn, "SELECT transaksi.*,(transaksi.total+transaksi.ongkir) as sub FROM transaksi INNER JOIN pelanggan on pelanggan.id_pel=transaksi.pelanggan WHERE transaksi.tanggal BETWEEN '$tglawal' AND '$tglahir' ORDER BY no ASC");
 $sub = 0;
                 while ($user_data = mysqli_fetch_array($result)) { ?>
                   <tr>
@@ -63,6 +66,9 @@ $sub = 0;
                     <td><?php echo $user_data['tanggal'] ?></td>
                     <td><?php echo $user_data['invoice'] ?></td>
                     <td><?php echo $user_data['nama'] ?></td>
+                    <td><?php echo $user_data['ongkir'] ?></td>
+                    <td><?php echo $user_data['resi'] ?></td>
+                    <td><?php echo $user_data['eks'] ?></td>
                     <td><?php if ($user_data['status'] == "Menunggu Pembayaran") { ?>
                         <span class="badge badge-warning"> <?php echo $user_data['status'] ?></span>
                       <?php } else if ($user_data['status'] == "Menunggu Konfirmasi") {  ?>
@@ -77,7 +83,7 @@ $sub = 0;
                         <span class="badge badge-light"> <?php echo $user_data['status'] ?></span>
                       <?php } ?>
                     </td>
-                    <td  align="right"><?php echo number_format($user_data['total'], 0, ',', '.') ?></td>
+                    <td  align="right"><?php echo number_format($user_data['sub'], 0, ',', '.') ?></td>
                   </tr>
                 <?php
               $sub += $user_data['total'];
