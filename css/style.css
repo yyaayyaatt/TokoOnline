@@ -1033,7 +1033,7 @@ a.w3_agile_vimeo:hover{
     border: 2px solid #EDEDED;
     background: #FFF;
 }
-.checkbox input + i:after,.radio input + i:after {
+/* .checkbox input + i:after,.radio input + i:after {
     position: absolute;
     opacity: 0;
     transition: opacity 0.1s;
@@ -1048,7 +1048,7 @@ a.w3_agile_vimeo:hover{
 .checkbox input,.radio input {
     position: absolute;
     left: -9999px;
-}
+} */
 .checkbox input + i:after {
     content: '';
     background: url("../images/check.png") no-repeat 1px 2px;
