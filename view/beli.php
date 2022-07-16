@@ -53,6 +53,9 @@ include('../admin/config/connection.php');
       </div>
       <div class="agile-login">
         <ul>
+                    <a href="keranjang.php"><button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+                    </a>
+          <li><a href="view/chat.php">Chat</a></li>
           <?php
           if (!isset($_SESSION['id_pel'])) { ?>
 
