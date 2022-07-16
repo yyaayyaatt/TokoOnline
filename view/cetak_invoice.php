@@ -3,7 +3,7 @@
 include('../admin/config/connection.php');
 
 $invoice = $_GET['invoice'];
-$query = mysqli_query($conn, "SELECT konfirmasi.*,transaksi.no,transaksi.resi,transaksi.ongkir FROM konfirmasi inner join transaksi on transaksi.invoice=konfirmasi.invoice where konfirmasi.invoice='$invoice' limit 1");
+$query = mysqli_query($conn, "SELECT konfirmasi.*,transaksi.no,transaksi.resi,transaksi.ongkir,transaksi.eks FROM konfirmasi inner join transaksi on transaksi.invoice=konfirmasi.invoice where konfirmasi.invoice='$invoice' limit 1");
 $trans = mysqli_fetch_assoc($query);
 ?>
 <!DOCTYPE html>
@@ -39,7 +39,7 @@ $trans = mysqli_fetch_assoc($query);
             <td><b>Griya Herbal Larieskaa</b><br>Sikepluh Raya, Kecamatan Kramat<br>Kabupaten Tegal<br>Indonesia - Jawa Tengah<br>Phone +62 815-4803-2872
             </td>
             <td><b><?php echo $_SESSION['name'] ?></b><br><?php echo $_SESSION['addrs'] ?><br><?php echo $_SESSION['phone'] ?><br><?php echo $_SESSION['email'] ?></td>
-            <td><b>Transaction Code: <?php echo $trans['no']; ?><br>Payment Date: <?php echo date('d-m-Y', strtotime($trans['tanggal'])); ?><br>Bank transfer: <?php echo $trans['bank']; ?><br>No.Resi: <?php echo $trans['resi']; ?></br></td>
+            <td><b>Transaction Code: <?php echo $trans['no']; ?><br>Payment Date: <?php echo date('d-m-Y', strtotime($trans['tanggal'])); ?><br>Bank transfer: <?php echo $trans['bank']; ?><br>No.Resi: <?php echo $trans['resi']; ?><br>Ekspedisi: <?php echo $trans['eks']; ?></br></td>
         </tr>
     </table><br>
     <table class="table table-striped" style="width: 100%;">
