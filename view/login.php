@@ -62,6 +62,10 @@ if (isset($_SESSION['log'])) {
               <a href="register.php" class="btn btn-success btn-block">Daftar</a>
               <!-- /.col -->
             </div>
+            <div class="col-sm-12">
+              <a href="lupa.php">Lupa Password</a>
+              <!-- /.col -->
+            </div>
           </div>
         </form>
 
