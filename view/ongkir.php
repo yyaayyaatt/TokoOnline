@@ -8,46 +8,16 @@ if (!isset($_SESSION['id_pel'])) {
 include('../admin/config/connection.php');
 
 ?>
-
 <!DOCTYPE html>
-<html>
 
 <head>
-    <title>Griya Herbal Larieskaa</title>
-    <link rel="shorcut icon" type="=image/png" href="icon/logo.png" />
-    <!-- for-mobile-apps -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Falenda Flora, Ruben Agung Santoso" />
-
-    <script type="application/x-javascript">
-        addEventListener("load", function() {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
-    <!-- //for-mobile-apps -->
+    <title>Fitur Ongkos Kirim Menggunakan API RajaOngkir</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/> -->
-    <!-- <link rel="stylesheet" href="../admin/dist/css/adminlte.min.css"> -->
-    <!-- font-awesome icons -->
-    <link href="../css/font-awesome.min.css" rel="stylesheet">
-    <link href="../css/skdslider.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"> </script>
-    <!-- //font-awesome icons -->
-    <!-- //js -->
-    <!-- <link href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'> -->
-    <!-- start-smoth-scrolling -->
-    <!-- start-smoth-scrolling -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-    <!-- header -->
     <div class="agileits_header">
         <div class="container">
             <div class="w3l_offers">
@@ -71,7 +41,7 @@ include('../admin/config/connection.php');
                         if ($_SESSION['role'] == 'member') { ?>
 
                             <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-                            <li><a href="../controller/logout.php">Keluar?</a></li>
+                            <li><a href="controller/logout.php">Keluar?</a></li>
                         <?php
                         } else if ($_SESSION['role'] == 'admin') { ?>
                             <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
@@ -166,117 +136,53 @@ include('../admin/config/connection.php');
             </div>
     </div>
     </nav><br>
-    <?php
-    //Get Data Provinsi
-    $curl = curl_init();
+    <div class="container">
+        <?php
+        //Get Data Provinsi
+        $curl = curl_init();
 
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "key: 9240d09aecd264c3966f4013d598c38b"
-        ),
-    ));
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "key:9240d09aecd264c3966f4013d598c38b"
+            ),
+        ));
 
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
-    ?>
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        ?>
+        <label>Provinsi</label><br>
+        <select name='provinsi' class="form-control" id='provinsi' required>";
+            <option>Pilih Provinsi</option>
+            <?php
+            $get = json_decode($response, true);
+            for ($i = 0; $i < count($get['rajaongkir']['results']); $i++) :
+            ?>
+                <option value="<?php echo $get['rajaongkir']['results'][$i]['province_id']; ?>"><?php echo $get['rajaongkir']['results'][$i]['province']; ?></option>
+            <?php endfor; ?>
+        </select><br>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Details Transaksi</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                            <li class="breadcrumb-item active">Transaksi</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
+        <label>Kabupaten</label><br>
+        <select id="kabupaten" class="form-control" name="kabupaten" required>
+            <!-- Data kabupaten akan diload menggunakan AJAX -->
+        </select> <br>
 
-        <!-- Main content -->
-        <section class="content">
+        <label>Kurir</label><br>
+        <select class="form-control" id="kurir" name="kurir">
+            <option value="">Pilih Kurir</option>
+            <option value="jne">JNE</option>
+            <option value="tiki">TIKI</option>
+            <option value="pos">POS INDONESIA</option>
+        </select>
 
-            <!-- Default box -->
-            <div class="card card-solid">
-                <div class="card-body pb-0">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label>Provinsi</label><br>
-                            <select name='provinsi' id='provinsi' class="form-control">";
-                                <option>Pilih Provinsi</option>
-                                <?php
-                                $get = json_decode($response, true);
-                                for ($i = 0; $i < count($get['rajaongkir']['results']); $i++) :
-                                ?>
-                                    <option value="<?php echo $get['rajaongkir']['results'][$i]['province_id']; ?>"><?php echo $get['rajaongkir']['results'][$i]['province']; ?></option>
-                                <?php endfor; ?>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label>Kabupaten</label><br>
-                            <select id="kabupaten" name="kabupaten" class="form-control">
-                                <!-- Data kabupaten akan diload menggunakan AJAX -->
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label>Kurir</label><br>
-                            <select class="form-control" id="kurir" name="kurir">
-                                <option value="">Pilih Kurir</option>
-                                <option value="jne">JNE</option>
-                                <option value="tiki">TIKI</option>
-                                <option value="pos">POS INDONESIA</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
-    <div id="tampil_ongkir"> </div>
-    </section>
-    <div style="background-color: #FF8C00;">
-        <footer class="main-footer">
-            <div class="row" style="padding: 40px;">
-                <div class="col-sm-8 text text-light" style="padding: 20px;">
-                    <h2>Kontak</h2><br>
-                    <i class="fa fa-user"></i> Jl. Sikepluh Raya, Kec. Kramat, Kab. Tegal<br>
-                    <i class="fa fa-phone"></i> +62 815-4803-2872 <br>
-                </div>
-                <div class="col-sm-4 text text-light" style="padding: 20px;">
-                    <h2>Sosial Media</h2><br>
-                    <i class="fa fa-facebook"> <a href="https://www.facebook.com/profile.php?id=100078120048945" class=" text-light">Facebook</a></i> <br>
-                    <i class="fa fa-instagram text-light"> <a href="https://instagram.com/larieskaaherbal?igshid=YmMyMTA2M2Y=" class=" text-light">Instagram</a></i> <br>
-                </div>
-                <div class="col-sm-12 text text-light" style="padding-top: 20px; text-align: center;">
-                    <hr class="new5">
-                    Copyright &copy; 2014-2021 <a href="#" class=" text-light">Griya Herbal Larieskaa</a>.
-                    All rights reserved.
-                </div>
-        </footer>
-    </div>
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+        <div id="tampil_ongkir"> </div>
+        <input type="hidden" id="invoice" name="invoice" value="<?php echo $_GET['invoice'] ?>"><br>
     </div>
     <script>
         $('#provinsi').change(function() {
@@ -300,22 +206,23 @@ include('../admin/config/connection.php');
             //Mengambil value dari option select provinsi asal, kabupaten, kurir kemudian parameternya dikirim menggunakan ajax
             var kab = $('#kabupaten').val();
             var kurir = $('#kurir').val();
+            var invoice = $('#invoice').val();
 
             $.ajax({
                 type: 'POST',
                 url: 'tabel-ongkir.php',
                 data: {
                     'kab_id': kab,
-                    'kurir': kurir
+                    'kurir': kurir,
+                    'invoice': invoice
                 },
                 success: function(data) {
-                    console.log(data);
                     //jika data berhasil didapatkan, tampilkan ke dalam element div tampil_ongkir
                     $("#tampil_ongkir").html(data);
                 }
             });
         });
     </script>
-</body>
-
-</html>
+    <?php include "../layout/footer.php" ?>
+    <!-- </body>
+</html> -->
