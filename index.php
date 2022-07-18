@@ -3,7 +3,11 @@ session_start();
 
 if (!isset($_SESSION['id_pel'])) {
   header('location:view/login.php');
-};
+} else if ($_SESSION['role'] == 'admin') {
+  header('location:../admin/index.php');
+} else if ($_SESSION['role'] == 'super') {
+  header('location:../sadmin/index.php');
+}
 
 include('admin/config/connection.php');
 
@@ -72,11 +76,9 @@ include('admin/config/connection.php');
             <?php
             } else if ($_SESSION['role'] == 'admin') { ?>
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="admin">Admin Panel</a></li>
               <li><a href="controller/logout.php">Keluar?</a></li>
            <?php } else if ($_SESSION['role'] == 'super') { ?>
               <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-              <li><a href="sadmin">Super Admin Panel</a></li>
               <li><a href="controller/logout.php">Keluar?</a></li>
           <?php
             }

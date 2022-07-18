@@ -1,4 +1,6 @@
-<?php include "../layout/header.php" ?>
+<?php
+session_start();
+ include "../layout/header.php" ?>
 <?php include "../layout/navbar.php" ?>
 <?php include "../layout/sidebar.php" ?>
 
@@ -20,13 +22,14 @@
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </div>
-
+  <section class="content">
+    <div class="container-fluid">
   <form method="POST" name="chat" action="#" enctype="application/x-www-form-urlencoded">
     <br>
     <h4>Obrolan</h4> <br>
     <p>Customer</p>
-    <input type="text" id="id" name="id" class="form-control" value="<?php echo $_SESSION['id_pel'] ?>" readonly></p><br>
-    <input type="text" id="id_tujuan" name="id_tujuan" class="form-control" value="<?php echo $_GET['id_pelanggan'] ?>" readonly></p><br>
+    <input type="hidden" id="id" name="id" class="form-control" value="<?php echo $_SESSION['id_pel'] ?>" readonly></p>
+    <input type="hidden" id="id_tujuan" name="id_tujuan" class="form-control" value="<?php echo $_GET['id_pelanggan'] ?>" readonly></p>
     <input type="text" id="nama" name="nama" class="form-control" value="<?php echo $_GET['nama'] ?>" readonly></p><br>
     <p>Pesan Obrolan</p>
     <textarea class="form-control" placeholder=" Obrolan Anda" name="pesan" rows="2" cols="40" maxlength="120" required></textarea><br><br>
@@ -85,7 +88,7 @@
   <table class="art-article" border="0" cellspacing="0" cellpadding="0" style=" margin: 0; width: 100%;">
     <tbody>
       <?php
-      $Tampil = "SELECT * FROM chat inner join pelanggan on pelanggan.id_pel=chat.id_pelanggan where id_pel='" . $_SESSION['id_pel'] . "'or id_tujuan='" . $_SESSION['id_pel'] . "' ORDER BY tanggal DESC LIMIT 99;";
+      $Tampil = "SELECT * FROM chat inner join pelanggan on pelanggan.id_pel=chat.id_pelanggan where id_pel='" . $_SESSION['id_pel'] . "'or id_tujuan='" . $_SESSION['id_pel'] . "' ORDER BY tanggal DESC";
       $query = mysqli_query($conn, $Tampil);
       while ($hasil = mysqli_fetch_array($query)) {
         $pesan = stripslashes($hasil['pesan']);
@@ -127,5 +130,7 @@
       ?>
     </tbody>
   </table><br>
+</div>
+  </section>
 </div>
 <?php include "../layout/footer.php" ?>

@@ -236,7 +236,7 @@ $pelanggan = $_SESSION['id_pel']; ?>
                   <?php if ($user_data['status'] == "Menunggu Pembayaran") { ?>
                     <span class="badge badge-info fa fa-check"><a href='../view/konf_bayar.php?invoice=<?php echo $user_data['invoice'] ?>' style="color:white"> Konfirmasi Bayar</a></span>
                   <?php } ?>
-                  <?php if ($user_data['status'] == "Menunggu Konfirmasi" || $user_data['status'] == "Bayar") { ?>
+                  <?php if ($user_data['status'] != "Selesai") { ?>
                     <span class="badge badge-success fa fa-print"><a href='../view/cetak_invoice.php?invoice=<?php echo $user_data['invoice'] ?>' style="color:white" target="_blank"> Cetak Invoice</a></span>
                   <?php } ?>
                   <?php if ($user_data['status'] == "Proses Pengiriman") { ?>

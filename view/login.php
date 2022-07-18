@@ -63,7 +63,7 @@ if (isset($_SESSION['log'])) {
               <!-- /.col -->
             </div>
             <div class="col-sm-12">
-              <a href="lupa.php">Lupa Password</a>
+              <a href="../controller/lupa.php">Lupa Password</a>
               <!-- /.col -->
             </div>
           </div>
