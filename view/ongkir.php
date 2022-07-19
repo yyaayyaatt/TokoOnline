@@ -42,7 +42,7 @@ include('../admin/config/connection.php');
                         if ($_SESSION['role'] == 'member') { ?>
 
                             <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
-                            <li><a href="controller/logout.php">Keluar?</a></li>
+                            <li><a href="../controller/logout.php">Keluar?</a></li>
                         <?php
                         } else if ($_SESSION['role'] == 'admin') { ?>
                             <li style="color:white">Halo, <?php echo $_SESSION["name"] ?>
