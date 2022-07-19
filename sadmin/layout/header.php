@@ -27,5 +27,4 @@
   <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">
 </head>
 <?php include_once("../config/connection.php");
-session_start();
 ?>

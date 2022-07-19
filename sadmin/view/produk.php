@@ -1,4 +1,6 @@
-<?php include "../layout/header.php" ?>
+<?php
+session_start();
+ include "../layout/header.php" ?>
 <?php include "../layout/navbar.php" ?>
 <?php include "../layout/sidebar.php" ?>
 
@@ -119,7 +121,7 @@
 
                 <td><?php
                 if ($user_data['status'] == "1") { ?>
-                    <a href='edit_pel.php?id_pel=<?php echo $user_data['id_pel'] ?>'><i class="fas fa-edit"> Edit</i></a>
+                    <a href='edit_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>'><i class="fas fa-edit"> Edit</i></a>
                     <?php
                     if ($_SESSION['role'] == "super") { ?>
                       | <a href='../controller/delete_produk.php?id_produk=<?php echo $user_data['id_produk'] ?>&foto=<?php echo $user_data['foto1'] ?>'><i class="fas fa-trash text text-danger"> Delete</i></a>
